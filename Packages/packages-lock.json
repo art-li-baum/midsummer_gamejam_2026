@@ -1,5 +1,26 @@
 {
   "dependencies": {
+    "com.starbannergames.applinker": {
+      "version": "https://github.com/DasNanda/SBG_AppLinker.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "5c32a0d4aede83dc982c6a81a01cbca3006cd1fc"
+    },
+    "com.starbannergames.servicelocator": {
+      "version": "https://github.com/DasNanda/SBG_ServiceLocator.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "7444d2988674656553c4f66980094fb8ee085786"
+    },
+    "com.starbannergames.speedscript": {
+      "version": "https://github.com/DasNanda/SBG_SpeedScript.git",
+      "depth": 0,
+      "source": "git",
+      "dependencies": {},
+      "hash": "33a19d8d40e89841a86ea9f068c100e484515fc8"
+    },
     "com.unity.ai.navigation": {
       "version": "2.0.12",
       "depth": 0,

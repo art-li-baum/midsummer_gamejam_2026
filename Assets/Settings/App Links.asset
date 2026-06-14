@@ -1,0 +1,45 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 77aadb0e03d445444b47beec5014fcbe, type: 3}
+  m_Name: App Links
+  m_EditorClassIdentifier: 
+  LinkedApps:
+  - Name: Aseprite
+    Paths:
+    - DeviceId: ac3bfd7434504d7fc67283a6b35506553d3c07e2
+      AppPath: C:/Program Files (x86)/Steam/steamapps/common/Aseprite/Aseprite.exe
+    SupportedFileEndings: png, ase, jpg, aseprite
+    HasAssetMenu: 1
+  - Name: Audacity
+    Paths:
+    - DeviceId: ac3bfd7434504d7fc67283a6b35506553d3c07e2
+      AppPath: C:/Program Files/Audacity/Audacity.exe
+    SupportedFileEndings: wav, mp3, ogg
+    HasAssetMenu: 1
+  - Name: Inkscape
+    Paths:
+    - DeviceId: ac3bfd7434504d7fc67283a6b35506553d3c07e2
+      AppPath: C:/Program Files/Inkscape/bin/inkscape.exe
+    SupportedFileEndings: svg
+    HasAssetMenu: 1
+  - Name: VS Code
+    Paths:
+    - DeviceId: ac3bfd7434504d7fc67283a6b35506553d3c07e2
+      AppPath: C:/Users/Nandi/AppData/Local/Programs/Microsoft VS Code/Code.exe
+    SupportedFileEndings: json, txt, cs
+    HasAssetMenu: 1
+  - Name: Blender
+    Paths:
+    - DeviceId: ac3bfd7434504d7fc67283a6b35506553d3c07e2
+      AppPath: C:/Program Files (x86)/Steam/steamapps/common/Blender/blender.exe
+    SupportedFileEndings: fbx, blend, blend1
+    HasAssetMenu: 1

@@ -85,7 +85,6 @@ namespace Gorpozon.WarehouseSim.Shelves
                 if (clearIndex < 0) clearIndex = NUM_SHELF_VISUALS - 1;
 
                 var c = visualShelves[clearIndex];
-                c.ClearShelf();
                 c.MoveOut(endPosition);
 
                 numShelves--;
@@ -111,7 +110,7 @@ namespace Gorpozon.WarehouseSim.Shelves
 
                 vis.LoadShelf(shelf);
                 //TODO set better timing spacing
-                vis.MoveIn(startPosition, shelfPositions[numShelves - 1], numShelves);
+                vis.MoveIn(startPosition, shelfPositions[numShelves - 1], 1);
 
                 numShelves--;
                 dataShelfIndex++;

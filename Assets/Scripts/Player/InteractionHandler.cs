@@ -57,6 +57,7 @@ namespace Gorpozon.WarehouseSim.Player
             {
                 heldObject.Interact();
                 heldObject = null;
+                hud.SetInspectControls(false);
             }
         }
 
@@ -73,7 +74,7 @@ namespace Gorpozon.WarehouseSim.Player
             }
             else if (currentTarget != null)
             {
-                hud.SetInteractionPrompt(string.Empty);
+                hud.HideInteractionPrompt();
                 currentTarget = null;
             }
 
@@ -84,6 +85,7 @@ namespace Gorpozon.WarehouseSim.Player
                     heldObject = currentTarget as GrabbableObject;
                     currentHoldDistance = defaultHoldDistance;
                     hud.SetInteractionPrompt("Drop");
+                    hud.SetInspectControls(true);
                 }
                 currentTarget.Interact();
             }

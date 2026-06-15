@@ -72,7 +72,7 @@ MonoBehaviour:
     m_Bits: 64
   objectGrabForce: 65
   objectRotationSpeed: 7
-  distanceAdjustSpeed: 5
+  distanceAdjustSpeed: 7
   defaultHoldDistance: 2
   minHoldDistance: 1
   maxHoldDistance: 3

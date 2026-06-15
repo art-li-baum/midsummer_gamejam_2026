@@ -1,4 +1,6 @@
 using Gorpozon.WarehouseSim.Objects;
+using Gorpozon.WarehouseSim.UI;
+using SBG.ServiceLocating;
 using System.Diagnostics.Tracing;
 using UnityEngine;
 
@@ -11,23 +13,31 @@ namespace Gorpozon.WarehouseSim.Player
 		[SerializeField] private LayerMask interactionMask;
 
 		private IInteractible currentTarget;
+		private HUD hud;
 
-		void Update()
+        private void Start()
+        {
+			ServiceLocator.TryGet(out hud);
+        }
+
+        void Update()
 		{
 			if (Physics.Raycast(viewCamera.position, viewCamera.forward, out var hit, interactionRange, interactionMask))
 			{
-				currentTarget = hit.collider.GetComponent<IInteractible>();
+                currentTarget = hit.collider.GetComponent<IInteractible>();
+
 				if (currentTarget != null && currentTarget.CanInteract)
 				{
-					// TODO: Set UI Prompt
+					hud.SetInteractionPrompt(currentTarget.InteractionPrompt);
 				}
 			}
-			else
+			else if (currentTarget != null)
 			{
-				currentTarget = null;
-			}
+                hud.SetInteractionPrompt(string.Empty);
+                currentTarget = null;
+            }
 
-			if (Input.GetMouseButtonDown(0) && currentTarget != null && currentTarget.CanInteract)
+            if (Input.GetMouseButtonDown(0) && currentTarget != null && currentTarget.CanInteract)
 			{
 				currentTarget.Interact();
 			}

@@ -1,4 +1,4 @@
-using Gorpozon.WarehouseSim.Player;
+using Gorpozon.WarehouseSim.Data;
 using UnityEngine;
 
 namespace Gorpozon.WarehouseSim.Objects
@@ -6,6 +6,8 @@ namespace Gorpozon.WarehouseSim.Objects
     [RequireComponent(typeof(Rigidbody))]
     public class GrabbableObject : MonoBehaviour, IInteractible
     {
+        public Product ProductData;
+
         public string InteractionPrompt => "Pick up";
 
         public bool CanInteract => true;
@@ -22,7 +24,6 @@ namespace Gorpozon.WarehouseSim.Objects
         {
             isHeld = !isHeld;
             rb.useGravity = !isHeld;
-            //rb.isKinematic = isHeld;
         }
 
         public void MoveTowardsTarget(Vector3 targetPos, float grabForce)

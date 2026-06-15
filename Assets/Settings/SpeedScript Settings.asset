@@ -23,7 +23,7 @@ MonoBehaviour:
   - {fileID: 11400000, guid: 62adc3e21e8251a4ea7d2048fb09cbbd, type: 2}
   - {fileID: 11400000, guid: c51591ebd0ae8064aa0e085709215e4f, type: 2}
   DefaultContextMenu: MyProject
-  BaseNamespace: 0
+  BaseNamespace: 1
   CustomBaseNamespace: MyNamespace
   UseFolderNames: 1
   ScriptRootFolder: Scripts

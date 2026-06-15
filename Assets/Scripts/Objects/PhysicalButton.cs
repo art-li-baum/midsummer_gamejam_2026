@@ -30,10 +30,7 @@ namespace Gorpozon.WarehouseSim.Objects
 
             active = false;
 
-            this.StartTimer(() =>
-            {
-                active = true;
-            }, cooldown);
+            this.StartTimer(() => { active = true; }, cooldown);
         }
     }
 }

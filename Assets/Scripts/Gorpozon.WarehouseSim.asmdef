@@ -1,0 +1,16 @@
+{
+    "name": "Gorpozon.WarehouseSim",
+    "rootNamespace": "",
+    "references": [
+        "GUID:848b1679f9e61fe41b562b9f8567d731"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

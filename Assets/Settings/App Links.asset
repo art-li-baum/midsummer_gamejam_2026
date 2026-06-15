@@ -17,29 +17,39 @@ MonoBehaviour:
     Paths:
     - DeviceId: ac3bfd7434504d7fc67283a6b35506553d3c07e2
       AppPath: C:/Program Files (x86)/Steam/steamapps/common/Aseprite/Aseprite.exe
+    - DeviceId: 6e44a8e26684791755294ecd974d47da006bfbe6
+      AppPath: No Path on this Device
     SupportedFileEndings: png, ase, jpg, aseprite
     HasAssetMenu: 1
   - Name: Audacity
     Paths:
     - DeviceId: ac3bfd7434504d7fc67283a6b35506553d3c07e2
       AppPath: C:/Program Files/Audacity/Audacity.exe
+    - DeviceId: 6e44a8e26684791755294ecd974d47da006bfbe6
+      AppPath: No Path on this Device
     SupportedFileEndings: wav, mp3, ogg
     HasAssetMenu: 1
   - Name: Inkscape
     Paths:
     - DeviceId: ac3bfd7434504d7fc67283a6b35506553d3c07e2
       AppPath: C:/Program Files/Inkscape/bin/inkscape.exe
+    - DeviceId: 6e44a8e26684791755294ecd974d47da006bfbe6
+      AppPath: No Path on this Device
     SupportedFileEndings: svg
     HasAssetMenu: 1
   - Name: VS Code
     Paths:
     - DeviceId: ac3bfd7434504d7fc67283a6b35506553d3c07e2
       AppPath: C:/Users/Nandi/AppData/Local/Programs/Microsoft VS Code/Code.exe
+    - DeviceId: 6e44a8e26684791755294ecd974d47da006bfbe6
+      AppPath: No Path on this Device
     SupportedFileEndings: json, txt, cs
     HasAssetMenu: 1
   - Name: Blender
     Paths:
     - DeviceId: ac3bfd7434504d7fc67283a6b35506553d3c07e2
       AppPath: C:/Program Files (x86)/Steam/steamapps/common/Blender/blender.exe
+    - DeviceId: 6e44a8e26684791755294ecd974d47da006bfbe6
+      AppPath: No Path on this Device
     SupportedFileEndings: fbx, blend, blend1
     HasAssetMenu: 1

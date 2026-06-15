@@ -5442,6 +5442,18 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.x
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 1962524547858878989, guid: d93d2cfb2472f7247800193d7636ad39, type: 3}
+      propertyPath: newTestMessages.Array.data[1].fontSize
+      value: 80
+      objectReference: {fileID: 0}
+    - target: {fileID: 1962524547858878989, guid: d93d2cfb2472f7247800193d7636ad39, type: 3}
+      propertyPath: newTestMessages.Array.data[2].fontSize
+      value: 100
+      objectReference: {fileID: 0}
+    - target: {fileID: 1962524547858878989, guid: d93d2cfb2472f7247800193d7636ad39, type: 3}
+      propertyPath: newTestMessages.Array.data[3].fontSize
+      value: 200
+      objectReference: {fileID: 0}
     - target: {fileID: 2290186264270518514, guid: d93d2cfb2472f7247800193d7636ad39, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0

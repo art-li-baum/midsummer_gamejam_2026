@@ -8,16 +8,16 @@ namespace Gorpozon.WarehouseSim.Objects
 	{
 		public event Action OnPackageShipped;
 
-        [SerializeField] private GameObject boxPrefab_Small;
-		[SerializeField] private GameObject boxPrefab_Medium;
-		[SerializeField] private GameObject boxPrefab_Large;
+        [SerializeField] private Package boxPrefab_Small;
+		[SerializeField] private Package boxPrefab_Medium;
+		[SerializeField] private Package boxPrefab_Large;
 		[Space]
         [SerializeField] private float beltSpeed = 5;
 		[SerializeField] private int packingStopIndex = 3;
 		[SerializeField] private Transform[] path;
 
-		private GameObject currentBox;
-		private GameObject nextBox;
+		private Package currentBox;
+		private Package nextBox;
 		private bool isLerpingBoxes;
 		private bool currentBoxArrived;
 		private bool nextBoxArrived;
@@ -68,20 +68,34 @@ namespace Gorpozon.WarehouseSim.Objects
                 }
             }
 
-			if (currentBoxArrived && nextBoxArrived) isLerpingBoxes = false;
+			if (currentBoxArrived && nextBoxArrived)
+            {
+                isLerpingBoxes = false;
+                currentBox = nextBox;
+                currentBoxPoint = nextBoxPoint;
+            }
         }
 
 		public void Next() => Next(null);
 
         public void Next(ShippingOrder nextOrder)
 		{
-			if (isLerpingBoxes) return;
+            if (isLerpingBoxes) return;
 
-			currentBox = nextBox;
-			currentBoxPoint = nextBoxPoint;
+            if (currentBox != null)
+            {
+                currentBox.TryCloseLid(() => SpawnAndLerpBoxes(nextOrder), null);
+            }
+            else
+            {
+                SpawnAndLerpBoxes(nextOrder);
+            }
+        }
 
-			if (nextOrder != null)
-			{
+        private void SpawnAndLerpBoxes(ShippingOrder nextOrder)
+		{
+            if (nextOrder != null)
+            {
                 switch (nextOrder.BoxSize)
                 {
                     case ShippingOrder.PackagingSize.Small:
@@ -97,11 +111,11 @@ namespace Gorpozon.WarehouseSim.Objects
                 }
             }
 
-			nextBoxPoint = 1;
-			isLerpingBoxes = true;
-			nextBoxArrived = nextBox != null ? false : true;
-			currentBoxArrived = currentBox != null ? false : true;
-		}
+            nextBoxPoint = 1;
+            isLerpingBoxes = true;
+            nextBoxArrived = nextBox != null ? false : true;
+            currentBoxArrived = currentBox != null ? false : true;
+        }
 
         private void OnDrawGizmos()
         {

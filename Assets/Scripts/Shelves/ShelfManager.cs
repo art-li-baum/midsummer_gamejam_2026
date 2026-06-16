@@ -19,6 +19,7 @@ namespace Gorpozon.WarehouseSim.Shelves
 		[SerializeField] private Vector3 startPosition;
 		[SerializeField] private Vector3 endPosition;
 
+        private Vector3 shelfOffset;
 
         private ShelfLevelLoadout currentShelves;
 
@@ -44,6 +45,8 @@ namespace Gorpozon.WarehouseSim.Shelves
 
                 visualShelves[i] = shelf;
 			}
+
+            shelfOffset = shelfPositions[0] - shelfPositions[1];
 
             LoadNewShift(0);
 
@@ -85,7 +88,7 @@ namespace Gorpozon.WarehouseSim.Shelves
                 if (clearIndex < 0) clearIndex = NUM_SHELF_VISUALS - 1;
 
                 var c = visualShelves[clearIndex];
-                c.MoveOut(endPosition);
+                c.MoveOut(endPosition - (shelfOffset * (NUMBER_OF_SHELVES - numShelves)));
 
                 numShelves--;
             }
@@ -110,7 +113,7 @@ namespace Gorpozon.WarehouseSim.Shelves
 
                 vis.LoadShelf(shelf);
                 //TODO set better timing spacing
-                vis.MoveIn(startPosition, shelfPositions[numShelves - 1], 1);
+                vis.MoveIn(startPosition + (shelfOffset * (NUMBER_OF_SHELVES - numShelves)), shelfPositions[numShelves - 1], 1);
 
                 numShelves--;
                 dataShelfIndex++;

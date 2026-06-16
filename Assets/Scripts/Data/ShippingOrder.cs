@@ -14,6 +14,14 @@ namespace Gorpozon.WarehouseSim.Data
 			public int Amount;
 		}
 
+		public enum PackagingSize
+		{
+			Small,
+			Medium,
+			Large,
+		}
+
+		public PackagingSize BoxSize;
 		public List<ProductQuantity> Products;
 	}
 }

@@ -25,6 +25,8 @@ namespace Gorpozon.WarehouseSim.Objects
 
         public void Interact()
         {
+            if (!active) return;
+
             anim.SetTrigger("Pressed");
             OnClick?.Invoke();
 

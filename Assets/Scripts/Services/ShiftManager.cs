@@ -1,8 +1,8 @@
 using Gorpozon.WarehouseSim.Data;
+using Gorpozon.WarehouseSim.UI;
 using SBG.ServiceLocating;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Linq;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -17,12 +17,14 @@ namespace Gorpozon.WarehouseSim.Services
 			public List<int> ProductScores;
 			public float ExcessPenalty;
 			public float Percentage;
+			public int GBuckReward;
 
-			public OrderScore(List<int> scores, float excessPenalty, float percentage)
+			public OrderScore(List<int> scores, float excessPenalty, float percentage, int gBucks)
 			{
 				ProductScores = scores;
 				ExcessPenalty = excessPenalty;
 				Percentage = percentage;
+				GBuckReward = gBucks;
 			}
 		}
 
@@ -40,6 +42,7 @@ namespace Gorpozon.WarehouseSim.Services
 		private ShippingOrder currentOrder;
 
 		private OrderPool pool;
+		private HUD hud;
 
 		public void StartShift()
 		{
@@ -61,7 +64,7 @@ namespace Gorpozon.WarehouseSim.Services
 			if (currentOrder == null) return;
 
 			float ratingPercentage = EvaluateOrder(shippedProducts);
-			UnityEngine.Debug.Log($"Score: {ratingPercentage * 100} % - (Deduction: {orderScores[^1].ExcessPenalty})");
+			UnityEngine.Debug.Log($"Score: {ratingPercentage} % - (Deduction: {orderScores[^1].ExcessPenalty})");
 
 			if (remainingOrders.Count > 0)
 			{
@@ -73,6 +76,9 @@ namespace Gorpozon.WarehouseSim.Services
 				currentOrder = null;
                 OnOrderChanged?.Invoke(currentOrder);
                 OnShiftComplete?.Invoke();
+
+				if (hud == null) ServiceLocator.TryGet(out hud);
+				hud.ShowShiftReport(orderScores.ToArray());
 			}
 		}
 
@@ -107,10 +113,11 @@ namespace Gorpozon.WarehouseSim.Services
 			
 			for (int i = 0; i < itemScores.Count; i++) score += itemScores[i];
 
-			float excessPenalty = excessProducts / 3f;
+			float excessPenalty = excessProducts * 0.1f; // 10 % penalty per item
+			float resultPercentage = Mathf.Clamp01((score / itemScores.Count) - excessPenalty);
+			int gBucks = Mathf.FloorToInt(resultPercentage * 10); // 1 Buck per 10%
 
-			float resultPercentage = Mathf.Clamp01((score - excessPenalty) / itemScores.Count);
-            orderScores.Add(new OrderScore(itemScores, excessPenalty, resultPercentage));
+            orderScores.Add(new OrderScore(itemScores, excessPenalty, resultPercentage, gBucks));
 
 			return resultPercentage;
         }

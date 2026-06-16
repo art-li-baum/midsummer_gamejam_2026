@@ -26,8 +26,8 @@ Transform:
   m_GameObject: {fileID: 2889924398552143068}
   serializedVersion: 2
   m_LocalRotation: {x: -0.7071068, y: -0.7071068, z: 0, w: 0}
-  m_LocalPosition: {x: -2.0479999, y: -0.47, z: 4.97}
-  m_LocalScale: {x: 2, y: 2, z: 2}
+  m_LocalPosition: {x: -1.59, y: -0.47, z: 1.11}
+  m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 1300820766646853656}
@@ -51,10 +51,10 @@ MonoBehaviour:
   m_EndAngleFade: 180
   m_UVScale: {x: 1, y: 1}
   m_UVBias: {x: 0, y: 0}
-  m_DecalLayerMask: 3
+  m_DecalLayerMask: 4
   m_ScaleMode: 0
-  m_Offset: {x: 0, y: 0, z: 0.5}
-  m_Size: {x: 1, y: 1, z: 1}
+  m_Offset: {x: 0, y: 0, z: 0.05}
+  m_Size: {x: 1, y: 1, z: 0.1}
   m_FadeFactor: 1
 --- !u!1 &7259050238709647704
 GameObject:
@@ -1955,5 +1955,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efaa1a62a538e0468c48fc3146c5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupDistance: 2
-  rotationSpeed: 50
+  ProductData: {fileID: 0}

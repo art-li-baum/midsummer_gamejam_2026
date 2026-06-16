@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 113914282050083464}
   - component: {fileID: 257247685920179349}
   m_Layer: 5
-  m_Name: StatPannel (4)
+  m_Name: Error Stat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -27,7 +27,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 588195422370734661}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 22}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -169,7 +169,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'EMPLOYEE LEVEL: '
+  m_text: 'SHIFTS WORKED:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -178,8 +178,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287238144
-  m_fontColor: {r: 0, g: 0.06227824, b: 0.54088044, a: 1}
+    rgba: 4284615938
+  m_fontColor: {r: 0.006032157, g: 0.049813658, b: 0.38364768, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -315,8 +315,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287238144
-  m_fontColor: {r: 0, g: 0.06227824, b: 0.54088044, a: 1}
+    rgba: 4281335946
+  m_fontColor: {r: 0.5411765, g: 0, b: 0.1883377, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -404,7 +404,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 2956688738539178039}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -22}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -600,6 +600,7 @@ GameObject:
   m_Component:
   - component: {fileID: 3520525279220715186}
   - component: {fileID: 3503253029299323304}
+  - component: {fileID: 2516151972525758417}
   m_Layer: 5
   m_Name: StatusScreen
   m_TagString: Untagged
@@ -652,6 +653,22 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 1
   m_TargetDisplay: 0
+--- !u!114 &2516151972525758417
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3776505763993310350}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 415975ae40cdd5b47868efcb1fd05530, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  levelAmmount: {fileID: 9150465479268535032}
+  glorpobuxAmmount: {fileID: 104747304461206352}
+  packageAmmount: {fileID: 4147775778790004247}
+  shiftAmmount: {fileID: 3464843560190196680}
 --- !u!1 &4411635235174225525
 GameObject:
   m_ObjectHideFlags: 0
@@ -665,7 +682,7 @@ GameObject:
   - component: {fileID: 8014344854524514846}
   - component: {fileID: 6737662080007212902}
   m_Layer: 5
-  m_Name: StatPannel (3)
+  m_Name: Money Stat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -679,7 +696,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 4411635235174225525}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 22}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -973,7 +990,7 @@ GameObject:
   - component: {fileID: 5615248188443756904}
   - component: {fileID: 5394534931249240069}
   m_Layer: 5
-  m_Name: StatPannel (1)
+  m_Name: Packages Stat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -987,7 +1004,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 5287349551009995326}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 22}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -999,7 +1016,7 @@ RectTransform:
   m_AnchorMax: {x: 0, y: 0}
   m_AnchoredPosition: {x: 0, y: 0}
   m_SizeDelta: {x: 0, y: 90.8}
-  m_Pivot: {x: 0.5, y: 0.5}
+  m_Pivot: {x: 0, y: 0.5}
 --- !u!222 &952301020508106569
 CanvasRenderer:
   m_ObjectHideFlags: 0
@@ -1090,7 +1107,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 6794041944669045692}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: -22}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children: []
@@ -1266,7 +1283,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'EMPLOYEE LEVEL: '
+  m_text: 'GLORPOBUX:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1275,8 +1292,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287238144
-  m_fontColor: {r: 0, g: 0.06227824, b: 0.54088044, a: 1}
+    rgba: 4278220047
+  m_fontColor: {r: 0.06030743, g: 0.45911938, b: 0.0014436748, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1403,7 +1420,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'EMPLOYEE LEVEL: '
+  m_text: 'PACKAGES SHIPPED:'
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1412,8 +1429,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287238144
-  m_fontColor: {r: 0, g: 0.06227824, b: 0.54088044, a: 1}
+    rgba: 4284615938
+  m_fontColor: {r: 0.006032157, g: 0.049813658, b: 0.38364768, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1430,8 +1447,8 @@ MonoBehaviour:
   m_faceColor:
     serializedVersion: 2
     rgba: 4294967295
-  m_fontSize: 56.85
-  m_fontSizeBase: 56.85
+  m_fontSize: 51.32
+  m_fontSizeBase: 51.32
   m_fontWeight: 400
   m_enableAutoSizing: 0
   m_fontSizeMin: 18
@@ -1549,8 +1566,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287238144
-  m_fontColor: {r: 0, g: 0.06227824, b: 0.54088044, a: 1}
+    rgba: 4284615938
+  m_fontColor: {r: 0.006032157, g: 0.049813658, b: 0.38364768, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1677,7 +1694,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: 'EMPLOYEE LEVEL: '
+  m_text: PAY DOCKED
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
   m_sharedMaterial: {fileID: 2180264, guid: 8f586378b4e144a9851e7b34d9b748ee, type: 2}
@@ -1686,8 +1703,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287238144
-  m_fontColor: {r: 0, g: 0.06227824, b: 0.54088044, a: 1}
+    rgba: 4281335946
+  m_fontColor: {r: 0.5411765, g: 0, b: 0.1883377, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -1762,7 +1779,7 @@ GameObject:
   - component: {fileID: 2141698841398793015}
   - component: {fileID: 1934152898735591310}
   m_Layer: 5
-  m_Name: StatPannel (2)
+  m_Name: Shift Stat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -1776,7 +1793,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8399015471950260660}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 22}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -1927,8 +1944,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287238144
-  m_fontColor: {r: 0, g: 0.06227824, b: 0.54088044, a: 1}
+    rgba: 4279596060
+  m_fontColor: {r: 0.10980393, g: 0.454902, b: 0.08235294, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2003,7 +2020,7 @@ GameObject:
   - component: {fileID: 6497125346014489170}
   - component: {fileID: 8313575995622018927}
   m_Layer: 5
-  m_Name: StatPannel
+  m_Name: Level Stat
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -2017,7 +2034,7 @@ RectTransform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 8790860535377263846}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 22}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
@@ -2168,8 +2185,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4287238144
-  m_fontColor: {r: 0, g: 0.06227824, b: 0.54088044, a: 1}
+    rgba: 4284615938
+  m_fontColor: {r: 0.006032157, g: 0.049813658, b: 0.38364768, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:

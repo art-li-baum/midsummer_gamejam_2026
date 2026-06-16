@@ -6,7 +6,7 @@ using UnityEngine;
 
 namespace Gorpozon.WarehouseSim.UI
 { 
-	public class StatScreem: MonoBehaviour
+	public class ProgressScreen: MonoBehaviour
 	{
 		[SerializeField] private TMP_Text levelAmmount;
         [SerializeField] private TMP_Text glorpobuxAmmount;

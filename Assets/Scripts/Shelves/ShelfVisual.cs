@@ -64,7 +64,7 @@ namespace Gorpozon.WarehouseSim.Shelves
 			gameObject.SetActive(true);
 
 			//TODO: move from start to specified position
-			transform.localPosition = position;
+			transform.position = position;
 			transform.DOKill(true);
 			transform.DOMove(startPosition, timing).From();
 		}

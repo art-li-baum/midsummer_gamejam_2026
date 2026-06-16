@@ -46,10 +46,13 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d503fad3f55dfc14eb2037dfc1e6da98, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  viewCamera: {fileID: 5102330898184777871}
+  viewCamera: {fileID: 7499729973371067440}
   mouseSensitivity: 10
   pitchMin: -65
   pitchMax: 65
+  defaultFOV: 60
+  zoomFOV: 40
+  zoomLerpRate: 0.1
 --- !u!114 &3421092609248682727
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -67,6 +70,12 @@ MonoBehaviour:
   interactionMask:
     serializedVersion: 2
     m_Bits: 64
+  objectGrabForce: 65
+  objectRotationSpeed: 7
+  distanceAdjustSpeed: 7
+  defaultHoldDistance: 2
+  minHoldDistance: 1
+  maxHoldDistance: 3
 --- !u!1 &1610837803972150936
 GameObject:
   m_ObjectHideFlags: 0

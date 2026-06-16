@@ -10,10 +10,11 @@ namespace Gorpozon.WarehouseSim.Objects
 
         public string InteractionPrompt => "Pick up";
 
-        public bool CanInteract => true;
+        public bool CanInteract => !packaged;
 
         private Rigidbody rb;
         private bool isHeld;
+        private bool packaged;
 
         private void Awake()
         {
@@ -35,6 +36,14 @@ namespace Gorpozon.WarehouseSim.Objects
         public void AddTorque(Vector3 axis, float torque)
         {
             rb.AddTorque(axis * torque, ForceMode.VelocityChange);
+        }
+
+        public void FreezeForShipping(Transform pacakge)
+        {
+            rb.isKinematic = true;
+            isHeld = false;
+            packaged = true;
+            transform.SetParent(pacakge);
         }
     }
 }

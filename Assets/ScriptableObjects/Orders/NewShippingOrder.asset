@@ -12,6 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f787b1f9e3376a4fa7a66713d2e479c, type: 3}
   m_Name: NewShippingOrder
   m_EditorClassIdentifier: 
+  BoxSize: 0
   Products:
   - Product: {fileID: 11400000, guid: 3e3c607151398ab41b1079c991b2e961, type: 2}
     Amount: 1

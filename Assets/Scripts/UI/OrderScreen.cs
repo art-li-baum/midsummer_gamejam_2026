@@ -1,4 +1,6 @@
 using Gorpozon.WarehouseSim.Data;
+using Gorpozon.WarehouseSim.Services;
+using SBG.ServiceLocating;
 using TMPro;
 using UnityEngine;
 
@@ -6,15 +8,21 @@ namespace Gorpozon.WarehouseSim.UI
 {
 	public class OrderScreen: MonoBehaviour
 	{
-		[SerializeField] private ShippingOrder testOrder;
-
 		[SerializeField] private RectTransform orderParent;
 		[SerializeField] private ProductElement productElementPrefab;
 		[SerializeField] private TextMeshProUGUI totalPriceText;
 
+		private ShiftManager shiftManager;
+
         private void Start()
         {
-            ShowNextOrder(testOrder);
+			ServiceLocator.TryGet(out shiftManager);
+			shiftManager.OnOrderChanged += ShowNextOrder;
+        }
+
+        private void OnDestroy()
+        {
+            shiftManager.OnOrderChanged -= ShowNextOrder;
         }
 
         public void ShowNextOrder(ShippingOrder order)
@@ -28,12 +36,15 @@ namespace Gorpozon.WarehouseSim.UI
 			// Populate new Entries
 			float totalPrice = 0;
 
-			foreach (var item in order.Products)
+			if (order != null)
 			{
-				totalPrice += item.Product.Price * item.Amount;
-				var productElement = Instantiate(productElementPrefab, orderParent);
-				productElement.Setup(item);
-			}
+                foreach (var item in order.Products)
+                {
+                    totalPrice += item.Product.Price * item.Amount;
+                    var productElement = Instantiate(productElementPrefab, orderParent);
+                    productElement.Setup(item);
+                }
+            }
 
 			totalPriceText.text = $"$ {totalPrice:0.00}";
 		}

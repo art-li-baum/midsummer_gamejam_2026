@@ -1,6 +1,8 @@
+using Gorpozon.WarehouseSim.Data;
 using SBG.Pocketwatch;
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
 
 namespace Gorpozon.WarehouseSim.Objects
@@ -57,6 +59,26 @@ namespace Gorpozon.WarehouseSim.Objects
                 anim.SetTrigger("Close");
                 if (onSuccess != null) callbackTimer = this.StartTimer(onSuccess, animationDelay);
             }
+        }
+
+        public ShippingOrder.ProductQuantity[] GetContents()
+        {
+            var contents = new Dictionary<Product, int>();
+
+            for (int i = 0; i < heldObjects.Count; i++)
+            {
+                var product = heldObjects[i].ProductData;
+                if (!contents.ContainsKey(product))
+                {
+                    contents.Add(product, 1);
+                }
+                else
+                {
+                    contents[product]++;
+                }
+            }
+
+            return contents.Select(c => new ShippingOrder.ProductQuantity(c.Key,c.Value)).ToArray();
         }
 
         private void OnDrawGizmosSelected()

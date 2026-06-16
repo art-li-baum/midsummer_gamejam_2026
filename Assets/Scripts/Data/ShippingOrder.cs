@@ -12,6 +12,12 @@ namespace Gorpozon.WarehouseSim.Data
 			public Product Product;
 			[Min(1)]
 			public int Amount;
+
+			public ProductQuantity(Product product, int amount)
+			{
+				Product = product;
+				Amount = amount;
+			}
 		}
 
 		public enum PackagingSize

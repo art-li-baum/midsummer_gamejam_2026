@@ -302,7 +302,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 1c021f8d5df1cfe4d857375f9a479274, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  scriptableObjectServices: []
+  scriptableObjectServices:
+  - {fileID: 11400000, guid: dd1e63b91f2f677448d62ac2bf30b221, type: 2}
   componentServices:
   - SourceGO: {fileID: 8828932061527972641}
     ComponentIndex: 4

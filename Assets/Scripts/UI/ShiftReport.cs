@@ -4,9 +4,7 @@ using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Gorpozon.WarehouseSim.UI
 {
@@ -50,7 +48,7 @@ namespace Gorpozon.WarehouseSim.UI
 		private void Cleanup()
 		{
             scoreTotal.SetActive(false);
-            continueButton.gameObject.SetActive(false);
+            continueButton.interactable = false;
 
             for (int i = activeScoreEntries.Count-1; i >= 0; i--)
 			{
@@ -71,9 +69,9 @@ namespace Gorpozon.WarehouseSim.UI
 			float lerpTime;
 			float lerpDuration;
 
-            var shortDelay = new WaitForSecondsRealtime(0.25f);
-			var medDelay = new WaitForSecondsRealtime(0.5f);
-			var longDelay = new WaitForSecondsRealtime(1f);
+            var shortDelay = new WaitForSecondsRealtime(0.1f);
+			var medDelay = new WaitForSecondsRealtime(0.3f);
+			var longDelay = new WaitForSecondsRealtime(0.5f);
 
             yield return longDelay;
 
@@ -101,7 +99,7 @@ namespace Gorpozon.WarehouseSim.UI
                 penaltySum += score.ExcessPenalty;
 
                 lerpTime = 0;
-                lerpDuration = Mathf.Max(score.ExcessPenalty * 0.5f, 0.15f);
+                lerpDuration = Mathf.Max(score.ExcessPenalty * 0.25f, 0.1f);
 
                 while (lerpTime < lerpDuration)
                 {
@@ -114,7 +112,7 @@ namespace Gorpozon.WarehouseSim.UI
 
 				scoreSum += score.Percentage;
                 lerpTime = 0;
-				lerpDuration = Mathf.Max(score.Percentage * 0.5f, 0.15f);
+				lerpDuration = Mathf.Max(score.Percentage * 0.25f, 0.1f);
 
 				while (lerpTime < lerpDuration)
 				{
@@ -143,7 +141,7 @@ namespace Gorpozon.WarehouseSim.UI
 
 			float avgPenalty = penaltySum / scores.Length;
             lerpTime = 0;
-            lerpDuration = Mathf.Max(avgPenalty * 0.5f, 0.15f);
+            lerpDuration = Mathf.Max(avgPenalty * 0.25f, 0.1f);
 
             while (lerpTime < lerpDuration)
             {
@@ -158,7 +156,7 @@ namespace Gorpozon.WarehouseSim.UI
 
 			float avgScore = scoreSum / scores.Length;
             lerpTime = 0;
-            lerpDuration = Mathf.Max(avgScore * 0.5f, 0.15f);
+            lerpDuration = Mathf.Max(avgScore * 0.25f, 0.1f);
 
             while (lerpTime < lerpDuration)
             {
@@ -181,7 +179,7 @@ namespace Gorpozon.WarehouseSim.UI
 
             yield return longDelay;
 
-            continueButton.gameObject.SetActive(true);
+			continueButton.interactable = true;
         }
     }
 }

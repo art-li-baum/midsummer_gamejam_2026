@@ -25,15 +25,14 @@ namespace Gorpozon.WarehouseSim.Objects
 
         public void Interact()
         {
+            if (!active) return;
+
             anim.SetTrigger("Pressed");
             OnClick?.Invoke();
 
             active = false;
 
-            this.StartTimer(() =>
-            {
-                active = true;
-            }, cooldown);
+            this.StartTimer(() => { active = true; }, cooldown);
         }
     }
 }

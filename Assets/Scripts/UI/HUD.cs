@@ -1,5 +1,9 @@
 using DG.Tweening;
+using Gorpozon.WarehouseSim.Management;
 using Gorpozon.WarehouseSim.Services;
+using SBG.Pocketwatch;
+using SBG.ServiceLocating;
+using System;
 using TMPro;
 using UnityEngine;
 
@@ -8,15 +12,45 @@ namespace Gorpozon.WarehouseSim.UI
 	public class HUD: MonoBehaviour
 	{
 		[SerializeField] private TextMeshProUGUI promptText;
-		[SerializeField] private CanvasGroup interactionPrompt;
+		[SerializeField] private CanvasGroup promotionPopup;
+        [SerializeField] private CanvasGroup interactionPrompt;
 		[SerializeField] private CanvasGroup inspectControlsGroup;
 		[SerializeField] private ShiftReport shiftReport;
 		[SerializeField] private float elementFadeTime = 0.2f;
 		[SerializeField] private float controlsAlpha = 0.25f;
 
+		private ProgressionManager progressionManager;
+
         private void Awake()
         {
 			HideInteractionPrompt();
+        }
+
+        private void Start()
+        {
+			ServiceLocator.TryGet(out progressionManager);
+			progressionManager.OnLevelUp += ShowPromotionPopup;
+        }
+
+        private void OnDestroy()
+        {
+			progressionManager.OnLevelUp -= ShowPromotionPopup;
+        }
+
+        private void ShowPromotionPopup(int lvl)
+        {
+			this.StartTimer(() =>
+			{
+				promotionPopup.DOKill();
+				promotionPopup.DOFade(1, 0.5f).SetUpdate(false).OnComplete(() =>
+				{
+					this.StartTimer(() =>
+					{
+						promotionPopup.DOFade(0, 0.25f);
+					}, 4f);
+				});
+
+			}, 0.5f);
         }
 
         public void SetInteractionPrompt(string prompt)

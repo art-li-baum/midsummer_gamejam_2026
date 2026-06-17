@@ -14,21 +14,27 @@ namespace Gorpozon.WarehouseSim.Services
 		[System.Serializable]
 		public struct OrderScore
 		{
-			public List<int> ProductScores;
-			public float ExcessPenalty;
-			public float Percentage;
+			public int PossibleHits;
+			public int EvalCount;
+			public int Hits;
+			public int Misses;
+            public float Percentage;
+			public float Penalty;
 			public int GBuckReward;
 
-			public OrderScore(List<int> scores, float excessPenalty, float percentage, int gBucks)
+			public OrderScore(int hits, int misses, int possibleHits, float percentage, int gBucks)
 			{
-				ProductScores = scores;
-				ExcessPenalty = excessPenalty;
+				Hits = hits;
+				Misses = misses;
+				PossibleHits = possibleHits;
+				EvalCount = Hits + Misses;
 				Percentage = percentage;
+				Penalty = 1 - percentage;
 				GBuckReward = gBucks;
 			}
 		}
 
-		public const int OrdersPerDay = 5;
+		public const int OrdersPerDay = 3;
 
 		public Action<ShippingOrder> OnOrderChanged;
 		public Action OnShiftComplete;
@@ -48,13 +54,14 @@ namespace Gorpozon.WarehouseSim.Services
 		{
 			if (pool == null) ServiceLocator.TryGet(out pool);
 
-			for (int i = 0; i < OrdersPerDay; i++)
-			{
-				var order = pool.Pool[Random.Range(0, pool.Pool.Length)];
-				remainingOrders.Enqueue(order);
-			}
+			var orders = pool.GetSelection(OrdersPerDay);
 
-			orderScores.Clear();
+            foreach (var order in orders)
+			{
+                remainingOrders.Enqueue(order);
+            }
+
+            orderScores.Clear();
 			currentOrder = remainingOrders.Dequeue();
 			OnOrderChanged?.Invoke(currentOrder);
 		}
@@ -64,7 +71,6 @@ namespace Gorpozon.WarehouseSim.Services
 			if (currentOrder == null) return;
 
 			float ratingPercentage = EvaluateOrder(shippedProducts);
-			UnityEngine.Debug.Log($"Score: {ratingPercentage} % - (Deduction: {orderScores[^1].ExcessPenalty})");
 
 			if (remainingOrders.Count > 0)
 			{
@@ -84,40 +90,46 @@ namespace Gorpozon.WarehouseSim.Services
 
         private float EvaluateOrder(ShippingOrder.ProductQuantity[] shippedProducts)
         {
-			List<int> itemScores = new(); // 0 for fail, 1 for success
-			int excessProducts = 0;
+			int correctItems = 0;
+			int mismatchedItems = 0;
+			int expectedItems = 0;
 
 			foreach (var requirement in currentOrder.Products)
 			{
+				expectedItems += requirement.Amount;
+
                 var match = shippedProducts.FirstOrDefault(p => p.Product == requirement.Product);
 
-				for (int i = 0; i < requirement.Amount; i++)
-				{
-					if (match.Product == null || match.Amount < requirement.Amount) itemScores.Add(0);
-					else itemScores.Add(1);
-				}
+				if (match.Product == null) continue;
 
-				int excess = match.Amount - requirement.Amount;
-				if (excess > 0) excessProducts += excess;
+                if (match.Amount >= requirement.Amount)
+				{
+                    correctItems += requirement.Amount;
+					mismatchedItems += match.Amount - requirement.Amount;
+                }
+                else
+                {
+					int missedItems = requirement.Amount - match.Amount;
+					correctItems += requirement.Amount - missedItems;
+                }
             }
 
+			// Find Unique Excess Items (Excess Amount of requested items is checked above)
 			foreach (var item in shippedProducts)
 			{
-				if (!currentOrder.Products.Any(p => p.Product == item.Product))
-				{
-                    excessProducts += item.Amount;
-                }
+				bool isRequested = currentOrder.Products.Any(p => p.Product == item.Product);
+				if (!isRequested) mismatchedItems += item.Amount;
 			}
 
-			float score = 0;
-			
-			for (int i = 0; i < itemScores.Count; i++) score += itemScores[i];
-
-			float excessPenalty = excessProducts * 0.1f; // 10 % penalty per item
-			float resultPercentage = Mathf.Clamp01((score / itemScores.Count) - excessPenalty);
+			int totalShipped = correctItems + mismatchedItems;
+			int missingItems = Mathf.Max(expectedItems - correctItems, 0);
+			float score = expectedItems - (mismatchedItems + missingItems);
+			float resultPercentage = Mathf.Clamp01(score / expectedItems);
 			int gBucks = Mathf.FloorToInt(resultPercentage * 10); // 1 Buck per 10%
 
-            orderScores.Add(new OrderScore(itemScores, excessPenalty, resultPercentage, gBucks));
+			int misses = Mathf.Max(missingItems, mismatchedItems);
+
+            orderScores.Add(new OrderScore(correctItems, misses, expectedItems, resultPercentage, gBucks));
 
 			return resultPercentage;
         }

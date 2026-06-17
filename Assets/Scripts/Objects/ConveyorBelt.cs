@@ -55,7 +55,7 @@ namespace Gorpozon.WarehouseSim.Objects
                         var shippedContents = currentBox.GetContents();
 
                         currentBoxArrived = true;
-						Destroy(currentBox);
+						Destroy(currentBox.gameObject);
 						currentBox = null;
 
                         shiftManager.FinishOrder(shippedContents);

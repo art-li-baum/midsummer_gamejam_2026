@@ -68,6 +68,7 @@ namespace Gorpozon.WarehouseSim.Objects
             for (int i = 0; i < heldObjects.Count; i++)
             {
                 var product = heldObjects[i].ProductData;
+
                 if (!contents.ContainsKey(product))
                 {
                     contents.Add(product, 1);

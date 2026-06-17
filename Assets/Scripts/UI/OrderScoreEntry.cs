@@ -20,29 +20,45 @@ namespace Gorpozon.WarehouseSim.UI
 			this.score = score;
 
 			orderText.text = $"{orderNr:000}";
-			accuracyText.text = string.Empty;
 			penaltyText.text = "-";
 			scoreText.text = "-";
 			gBucksText.text = "-";
+
+            accuracyText.text = "[";
+
+            for (int i = 0; i < score.PossibleHits; i++)
+			{
+				accuracyText.text += "-";
+			}
+
+            accuracyText.text += "]";
         }
 
-		public void RevealNextAccuracy()
+        public void RevealNextAccuracy()
 		{
 			revealedAccuracy++;
-            accuracyText.text = string.Empty;
+			accuracyText.text = "[";
 
-            for (int i = 0; i < score.ProductScores.Count; i++)
+            for (int i = 0; i < score.EvalCount; i++)
 			{
-				if (i >= revealedAccuracy) break;
+                if (i == score.PossibleHits) accuracyText.text += "] ";
 
-                if (score.ProductScores[i] >= 1) accuracyText.text += "<color=green>O</color>";
+                if (i >= revealedAccuracy)
+				{
+					if (i < score.PossibleHits) accuracyText.text += "-";
+					continue;
+                }
+
+                if (score.Hits > i) accuracyText.text += "<color=green>O</color>";
                 else accuracyText.text += "<color=red>X</color>";
             }
+
+			if (score.EvalCount <= score.PossibleHits) accuracyText.text += "]";
         }
 
 		public void LerpPenalty(float progress)
 		{
-            float current = Mathf.Lerp(0, score.ExcessPenalty * 100, progress);
+            float current = Mathf.Lerp(0, score.Penalty * 100, progress);
             penaltyText.text = $"- {current:0} %";
         }
 

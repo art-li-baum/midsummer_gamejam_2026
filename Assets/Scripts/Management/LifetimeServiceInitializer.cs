@@ -8,6 +8,7 @@ namespace Gorpozon.WarehouseSim.Management
         protected override void RegisterCustomServices()
         {
             Register(new ShiftManager());
+            Register(new PlayerService());
         }
 	}
 }

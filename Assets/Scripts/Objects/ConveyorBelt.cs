@@ -75,9 +75,10 @@ namespace Gorpozon.WarehouseSim.Objects
                     nextBox.transform.position += diff.normalized * Time.fixedDeltaTime * beltSpeed;
 					nextBox.transform.LookAt(p);
                 }
-                else if (nextBoxPoint == packingStopIndex)
+                else
                 {
-					nextBoxArrived = true;
+                    nextBoxPoint++;
+                    if (nextBoxPoint >= packingStopIndex) nextBoxArrived = true;
                 }
             }
 

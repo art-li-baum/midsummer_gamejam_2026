@@ -1,4 +1,5 @@
 using Gorpozon.WarehouseSim.Data;
+using Gorpozon.WarehouseSim.Shelves;
 using UnityEngine;
 
 namespace Gorpozon.WarehouseSim.Objects
@@ -10,10 +11,14 @@ namespace Gorpozon.WarehouseSim.Objects
 
         public string InteractionPrompt => "Pick up";
 
-        public bool CanInteract => true;
+        public bool CanInteract => !packaged;
 
         private Rigidbody rb;
         private bool isHeld;
+        private bool packaged;
+        private bool onShelf;
+
+        private ShelfSlot shelf;
 
         private void Awake()
         {
@@ -24,6 +29,8 @@ namespace Gorpozon.WarehouseSim.Objects
         {
             isHeld = !isHeld;
             rb.useGravity = !isHeld;
+
+            if (onShelf) RemoveFromShelf();
         }
 
         public void MoveTowardsTarget(Vector3 targetPos, float grabForce)
@@ -35,6 +42,34 @@ namespace Gorpozon.WarehouseSim.Objects
         public void AddTorque(Vector3 axis, float torque)
         {
             rb.AddTorque(axis * torque, ForceMode.VelocityChange);
+        }
+
+        public void FreezeForShipping(Transform pacakge)
+        {
+            rb.isKinematic = true;
+            isHeld = false;
+            packaged = true;
+            transform.SetParent(pacakge);
+        }
+
+        public void HangOnShelf(ShelfSlot s)
+        {
+            shelf = s;
+            onShelf = true;
+
+            rb.isKinematic = true;
+            transform.SetParent(shelf.transform);
+            transform.position = shelf.transform.position;
+        }
+
+        public void RemoveFromShelf()
+        {
+            onShelf = false;
+
+            shelf.ItemRemoved();
+
+            rb.isKinematic = false;
+            transform.SetParent(null);
         }
     }
 }

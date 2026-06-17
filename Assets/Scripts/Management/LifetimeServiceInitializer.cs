@@ -1,3 +1,4 @@
+using Gorpozon.WarehouseSim.Services;
 using SBG.ServiceLocating;
 
 namespace Gorpozon.WarehouseSim.Management
@@ -6,7 +7,7 @@ namespace Gorpozon.WarehouseSim.Management
 	{
         protected override void RegisterCustomServices()
         {
-            
+            Register(new ShiftManager());
         }
 	}
 }

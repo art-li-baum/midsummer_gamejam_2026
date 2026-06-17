@@ -1,4 +1,5 @@
 using Gorpozon.WarehouseSim.Data;
+using Gorpozon.WarehouseSim.Management;
 using Gorpozon.WarehouseSim.UI;
 using SBG.ServiceLocating;
 using System;
@@ -34,8 +35,6 @@ namespace Gorpozon.WarehouseSim.Services
 			}
 		}
 
-		public const int OrdersPerDay = 3;
-
 		public Action<ShippingOrder> OnOrderChanged;
 		public Action OnShiftComplete;
 
@@ -47,14 +46,14 @@ namespace Gorpozon.WarehouseSim.Services
 		private List<OrderScore> orderScores = new();
 		private ShippingOrder currentOrder;
 
-		private OrderPool pool;
+		private ProgressionManager progressionManager;
 		private HUD hud;
 
 		public void StartShift()
 		{
-			if (pool == null) ServiceLocator.TryGet(out pool);
+			if (progressionManager == null) ServiceLocator.TryGet(out progressionManager);
 
-			var orders = pool.GetSelection(OrdersPerDay);
+			var orders = progressionManager.GetShiftOrders();
 
             foreach (var order in orders)
 			{
@@ -72,7 +71,7 @@ namespace Gorpozon.WarehouseSim.Services
 
 			float ratingPercentage = EvaluateOrder(shippedProducts);
 
-			if (remainingOrders.Count > 0)
+            if (remainingOrders.Count > 0)
 			{
                 currentOrder = remainingOrders.Dequeue();
                 OnOrderChanged?.Invoke(currentOrder);
@@ -80,10 +79,13 @@ namespace Gorpozon.WarehouseSim.Services
 			else
 			{
 				currentOrder = null;
-                OnOrderChanged?.Invoke(currentOrder);
+                OnOrderChanged?.Invoke(null);
                 OnShiftComplete?.Invoke();
 
-				if (hud == null) ServiceLocator.TryGet(out hud);
+				int gBucks = orderScores.Select(s => s.GBuckReward).Sum();
+				progressionManager.EarnGlorpobux(gBucks);
+
+                if (hud == null) ServiceLocator.TryGet(out hud);
 				hud.ShowShiftReport(orderScores.ToArray());
 			}
 		}
@@ -125,7 +127,7 @@ namespace Gorpozon.WarehouseSim.Services
 			int missingItems = Mathf.Max(expectedItems - correctItems, 0);
 			float score = expectedItems - (mismatchedItems + missingItems);
 			float resultPercentage = Mathf.Clamp01(score / expectedItems);
-			int gBucks = Mathf.FloorToInt(resultPercentage * 10); // 1 Buck per 10%
+			int gBucks = Mathf.FloorToInt(resultPercentage * 4); // 1 Buck per 25%
 
 			int misses = Mathf.Max(missingItems, mismatchedItems);
 

@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Gorpozon.WarehouseSim.Management;
 using Gorpozon.WarehouseSim.Services;
 using SBG.ServiceLocating;
 using System.Collections;
@@ -12,6 +13,7 @@ namespace Gorpozon.WarehouseSim.UI
 	[RequireComponent(typeof(CanvasGroup))]
 	public class ShiftReport: MonoBehaviour
 	{
+        [SerializeField] private ProgressionReport progressionReport;
 		[SerializeField] private GameObject scoreTotal;
 		[SerializeField] private Button continueButton;
 		[SerializeField] private OrderScoreEntry scoreEntryPrefab;
@@ -55,12 +57,14 @@ namespace Gorpozon.WarehouseSim.UI
 
 		public void HideShiftReport()
 		{
-            playerService.SetPause(false);
+            //playerService.SetPause(false);
             group.blocksRaycasts = false;
             group.interactable = false;
 
             group.DOKill();
             group.DOFade(0, 0.25f).SetUpdate(true);
+
+            progressionReport.ShowProgressionReport();
         }
 
         private void Cleanup()

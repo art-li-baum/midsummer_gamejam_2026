@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28dce540b34c72640ad6c47e64d7859b, type: 3}
   m_Name: OrderPool
   m_EditorClassIdentifier: 
-  Pool:
+  pool:
   - {fileID: 11400000, guid: 6713b81adc50ac3468e10ee4e3d033c9, type: 2}
   - {fileID: 11400000, guid: 7b27489aa68a5bf489678193a6d33795, type: 2}
   - {fileID: 11400000, guid: 53c5c7e37bdffda449c9dc6ca8717235, type: 2}

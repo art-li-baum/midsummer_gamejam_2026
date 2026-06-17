@@ -1,5 +1,5 @@
-using PlasticGui.WorkspaceWindow.Locks;
-using PlasticGui.WorkspaceWindow.QueryViews;
+using Gorpozon.WarehouseSim.Services;
+using SBG.ServiceLocating;
 using UnityEngine;
 
 namespace Gorpozon.WarehouseSim.Player
@@ -17,14 +17,18 @@ namespace Gorpozon.WarehouseSim.Player
 
         private float cameraPitch = 0f;
 
+        private PlayerService playerService;
+
         private void Start()
         {
-            Cursor.lockState = CursorLockMode.Locked;
-            Cursor.visible = false;
+            ServiceLocator.TryGet(out playerService);
+            playerService.SetCursor(false);
         }
 
         private void Update()
         {
+            if (playerService.Frozen) return;
+
             Vector2 input = Input.mousePositionDelta * mouseSensitivity * Time.deltaTime;
 
             cameraPitch -= input.y;

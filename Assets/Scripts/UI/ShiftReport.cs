@@ -1,12 +1,11 @@
 using DG.Tweening;
 using Gorpozon.WarehouseSim.Services;
+using SBG.ServiceLocating;
 using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
-using UnityEngine.SocialPlatforms.Impl;
 using UnityEngine.UI;
-using static UnityEngine.EventSystems.EventTrigger;
 
 namespace Gorpozon.WarehouseSim.UI
 {
@@ -27,10 +26,16 @@ namespace Gorpozon.WarehouseSim.UI
         private List<OrderScoreEntry> activeScoreEntries = new();
 
 		private CanvasGroup group;
+        private PlayerService playerService;
 
         private void Awake()
         {
             group = GetComponent<CanvasGroup>();
+        }
+
+        private void Start()
+        {
+            ServiceLocator.TryGet(out playerService);
         }
 
         public void ShowShiftReport(ShiftManager.OrderScore[] scores)
@@ -39,18 +44,29 @@ namespace Gorpozon.WarehouseSim.UI
 
 			group.blocksRaycasts = true;
 			group.interactable = true;
+            playerService.SetPause(true);
 
             group.DOKill();
-			group.DOFade(1, 0.25f).OnComplete(() =>
+			group.DOFade(1, 0.25f).SetUpdate(true).OnComplete(() =>
 			{
                 StartCoroutine(CO_ShowShiftReport(scores));
             });
 		}
 
-		private void Cleanup()
+		public void HideShiftReport()
+		{
+            playerService.SetPause(false);
+            group.blocksRaycasts = false;
+            group.interactable = false;
+
+            group.DOKill();
+            group.DOFade(0, 0.25f).SetUpdate(true);
+        }
+
+        private void Cleanup()
 		{
             scoreTotal.SetActive(false);
-            continueButton.gameObject.SetActive(false);
+            continueButton.interactable = false;
 
             for (int i = activeScoreEntries.Count-1; i >= 0; i--)
 			{
@@ -71,9 +87,9 @@ namespace Gorpozon.WarehouseSim.UI
 			float lerpTime;
 			float lerpDuration;
 
-            var shortDelay = new WaitForSecondsRealtime(0.25f);
-			var medDelay = new WaitForSecondsRealtime(0.5f);
-			var longDelay = new WaitForSecondsRealtime(1f);
+            var shortDelay = new WaitForSecondsRealtime(0.1f);
+			var medDelay = new WaitForSecondsRealtime(0.3f);
+			var longDelay = new WaitForSecondsRealtime(0.5f);
 
             yield return longDelay;
 
@@ -84,28 +100,29 @@ namespace Gorpozon.WarehouseSim.UI
 				var entry = Instantiate(scoreEntryPrefab, scoreEntryParent);
 				entry.transform.SetSiblingIndex(scoreEntryParent.childCount - 2);
 				entry.Init(i+1, score);
+                activeScoreEntries.Add(entry);
 
 				yield return medDelay;
 
-				totalAccuracyCount += score.ProductScores.Count;
+				totalAccuracyCount += score.PossibleHits;
+                totalReachedAccuracy += score.Hits;
 
-				foreach (var scoreEntry in score.ProductScores)
+                for (int j = 0; j < score.EvalCount; j++)
 				{
 					yield return shortDelay;
 					entry.RevealNextAccuracy();
-					totalReachedAccuracy += scoreEntry;
 				}
 
                 yield return medDelay;
 
-                penaltySum += score.ExcessPenalty;
+                penaltySum += score.Penalty;
 
                 lerpTime = 0;
-                lerpDuration = Mathf.Max(score.ExcessPenalty * 0.5f, 0.15f);
+                lerpDuration = Mathf.Max(score.Penalty * 0.25f, 0.1f);
 
                 while (lerpTime < lerpDuration)
                 {
-                    lerpTime += Time.deltaTime;
+                    lerpTime += Time.unscaledDeltaTime;
                     entry.LerpPenalty(lerpTime / lerpDuration);
                     yield return null;
                 }
@@ -114,11 +131,11 @@ namespace Gorpozon.WarehouseSim.UI
 
 				scoreSum += score.Percentage;
                 lerpTime = 0;
-				lerpDuration = Mathf.Max(score.Percentage * 0.5f, 0.15f);
+				lerpDuration = Mathf.Max(score.Percentage * 0.25f, 0.1f);
 
 				while (lerpTime < lerpDuration)
 				{
-					lerpTime += Time.deltaTime;
+					lerpTime += Time.unscaledDeltaTime;
 					entry.LerpScore(lerpTime /  lerpDuration);
 					yield return null;
 				}
@@ -143,14 +160,14 @@ namespace Gorpozon.WarehouseSim.UI
 
 			float avgPenalty = penaltySum / scores.Length;
             lerpTime = 0;
-            lerpDuration = Mathf.Max(avgPenalty * 0.5f, 0.15f);
+            lerpDuration = Mathf.Max(avgPenalty * 0.25f, 0.1f);
 
             while (lerpTime < lerpDuration)
             {
-                lerpTime += Time.deltaTime;
+                lerpTime += Time.unscaledDeltaTime;
                 float current = Mathf.Lerp(0, avgPenalty * 100, lerpTime / lerpDuration);
 
-                totalPenaltyText.text = $"<color=red>- {avgPenalty * 100} %</color>";
+                totalPenaltyText.text = $"<color=red>- {current:0} %</color>";
                 yield return null;
             }
 
@@ -158,11 +175,11 @@ namespace Gorpozon.WarehouseSim.UI
 
 			float avgScore = scoreSum / scores.Length;
             lerpTime = 0;
-            lerpDuration = Mathf.Max(avgScore * 0.5f, 0.15f);
+            lerpDuration = Mathf.Max(avgScore * 0.25f, 0.1f);
 
             while (lerpTime < lerpDuration)
             {
-                lerpTime += Time.deltaTime;
+                lerpTime += Time.unscaledDeltaTime;
                 float current = Mathf.Lerp(0, avgScore * 100, lerpTime / lerpDuration);
 				
 				string color;
@@ -181,7 +198,7 @@ namespace Gorpozon.WarehouseSim.UI
 
             yield return longDelay;
 
-            continueButton.gameObject.SetActive(true);
+			continueButton.interactable = true;
         }
     }
 }

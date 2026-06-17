@@ -77,8 +77,8 @@ namespace Gorpozon.WarehouseSim.Objects
                 }
                 else
                 {
-                    nextBoxPoint++;
                     if (nextBoxPoint >= packingStopIndex) nextBoxArrived = true;
+                    nextBoxPoint++;
                 }
             }
 

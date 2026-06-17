@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestShelf0 1
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 6203018340951987908, guid: e222422bfb33a7f4d8bb42330c291308, type: 3}
-  - {fileID: 6203018340951987908, guid: c66e00cb425ecef4fbc27264ec0af01e, type: 3}
-  - {fileID: 6203018340951987908, guid: c66e00cb425ecef4fbc27264ec0af01e, type: 3}
-  - {fileID: 6203018340951987908, guid: e222422bfb33a7f4d8bb42330c291308, type: 3}
+  - {fileID: 3242312222495243764, guid: 5c8f0e22573af5348b5398adb73c6654, type: 3}
+  - {fileID: 3242312222495243764, guid: 5c8f0e22573af5348b5398adb73c6654, type: 3}
+  - {fileID: 3242312222495243764, guid: 5c8f0e22573af5348b5398adb73c6654, type: 3}
+  - {fileID: 3242312222495243764, guid: 5c8f0e22573af5348b5398adb73c6654, type: 3}

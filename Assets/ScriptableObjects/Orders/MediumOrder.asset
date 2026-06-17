@@ -12,5 +12,9 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f787b1f9e3376a4fa7a66713d2e479c, type: 3}
   m_Name: MediumOrder
   m_EditorClassIdentifier: 
-  BoxSize: 1
-  Products: []
+  BoxSize: 2
+  Products:
+  - Product: {fileID: 11400000, guid: acca37c753faa67408d959f83205516f, type: 2}
+    Amount: 1
+  - Product: {fileID: 11400000, guid: 558af681c3aaf9f41999e24214f3495d, type: 2}
+    Amount: 1

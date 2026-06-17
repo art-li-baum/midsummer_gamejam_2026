@@ -1,4 +1,6 @@
 using Gorpozon.WarehouseSim.Data;
+using Gorpozon.WarehouseSim.Services;
+using SBG.ServiceLocating;
 using System;
 using UnityEngine;
 
@@ -24,6 +26,13 @@ namespace Gorpozon.WarehouseSim.Objects
         private int currentBoxPoint;
 		private int nextBoxPoint;
 
+        private ShiftManager shiftManager;
+
+        private void Start()
+        {
+            ServiceLocator.TryGet(out shiftManager);
+        }
+
         private void FixedUpdate()
         {
 			if (!isLerpingBoxes) return;
@@ -43,9 +52,14 @@ namespace Gorpozon.WarehouseSim.Objects
 					currentBoxPoint++;
 					if (currentBoxPoint >= path.Length)
 					{
+                        var shippedContents = currentBox.GetContents();
+
                         currentBoxArrived = true;
 						Destroy(currentBox);
 						currentBox = null;
+
+                        shiftManager.FinishOrder(shippedContents);
+                        OnPackageShipped?.Invoke();
                     }
                 }
 			}
@@ -64,7 +78,6 @@ namespace Gorpozon.WarehouseSim.Objects
                 else if (nextBoxPoint == packingStopIndex)
                 {
 					nextBoxArrived = true;
-					OnPackageShipped?.Invoke();
                 }
             }
 
@@ -76,25 +89,25 @@ namespace Gorpozon.WarehouseSim.Objects
             }
         }
 
-		public void Next() => Next(null);
-
-        public void Next(ShippingOrder nextOrder)
-		{
+		public void Next()
+        {
             if (isLerpingBoxes) return;
+
+            ShippingOrder order = shiftManager.CurrentOrder;
 
             if (currentBox != null)
             {
-                currentBox.TryCloseLid(() => SpawnAndLerpBoxes(nextOrder), null);
+                currentBox.TryCloseLid(() => SpawnAndLerpBoxes(order), null);
             }
             else
             {
-                SpawnAndLerpBoxes(nextOrder);
+                SpawnAndLerpBoxes(order);
             }
         }
 
         private void SpawnAndLerpBoxes(ShippingOrder nextOrder)
 		{
-            if (nextOrder != null)
+            if (nextOrder != null && shiftManager.QueuedOrderCount > 0)
             {
                 switch (nextOrder.BoxSize)
                 {
@@ -109,6 +122,10 @@ namespace Gorpozon.WarehouseSim.Objects
                         break;
                     default: break;
                 }
+            }
+            else
+            {
+                nextBox = null;
             }
 
             nextBoxPoint = 1;

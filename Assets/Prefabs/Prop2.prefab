@@ -2246,5 +2246,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efaa1a62a538e0468c48fc3146c5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  pickupDistance: 2
-  rotationSpeed: 50
+  ProductData: {fileID: 0}

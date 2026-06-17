@@ -127,7 +127,7 @@ namespace Gorpozon.WarehouseSim.Services
 			int missingItems = Mathf.Max(expectedItems - correctItems, 0);
 			float score = expectedItems - (mismatchedItems + missingItems);
 			float resultPercentage = Mathf.Clamp01(score / expectedItems);
-			int gBucks = Mathf.FloorToInt(resultPercentage * 4); // 1 Buck per 25%
+			int gBucks = Mathf.FloorToInt(resultPercentage * 50); // 1 Buck per 25%
 
 			int misses = Mathf.Max(missingItems, mismatchedItems);
 

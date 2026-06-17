@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa1ef3796fdb04489a41c2609989e28, type: 3}
   m_Name: Level2
   m_EditorClassIdentifier: 
-  TotalRequiredGBucks: 10
+  TotalRequiredGBucks: 25
   OrdersPerShift: 4
   PromotionName: Junior Family Member
   OrderPool:

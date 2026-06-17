@@ -1,4 +1,5 @@
 using DG.Tweening;
+using Gorpozon.WarehouseSim.Data;
 using Gorpozon.WarehouseSim.Management;
 using Gorpozon.WarehouseSim.Services;
 using SBG.ServiceLocating;
@@ -25,6 +26,16 @@ namespace Gorpozon.WarehouseSim.UI
         private PlayerService playerService;
         private ProgressionManager progressionManager;
 
+        private int previousGBucks = 0;
+        private int previousRank = 0;
+        private int previousLevel = 0;
+        private float levelProgress = 0;
+
+        private WaitForSecondsRealtime longDelay;
+        private float lerpMultiplier;
+
+        private Coroutine activeRoutine;
+
         private void Awake()
         {
             group = GetComponent<CanvasGroup>();
@@ -36,6 +47,17 @@ namespace Gorpozon.WarehouseSim.UI
             ServiceLocator.TryGet(out progressionManager);
         }
 
+        private void Update()
+        {
+            if (activeRoutine == null) return;
+
+            if (Input.GetMouseButtonDown(0))
+            {
+                longDelay = new WaitForSecondsRealtime(0);
+                lerpMultiplier = 0.01f;
+            }
+        }
+
         public void ShowProgressionReport()
         {
             continueButton.interactable = false;
@@ -44,14 +66,14 @@ namespace Gorpozon.WarehouseSim.UI
             group.interactable = true;
             playerService.SetPause(true);
 
-            var lastLevel = progressionManager.Progression.Levels[progressionManager.PreviousLevel];
-            var nextLevel = progressionManager.Progression.Levels[progressionManager.PreviousLevel + 1];
+            var lastLevel = progressionManager.Progression.Levels[previousLevel];
+            var nextLevel = progressionManager.Progression.Levels[previousLevel + 1];
             Setup(lastLevel, nextLevel);
 
             group.DOKill();
             group.DOFade(1, 0.25f).SetUpdate(true).OnComplete(() =>
             {
-                StartCoroutine(CO_ShowProgressionReport());
+                activeRoutine = StartCoroutine(CO_ShowProgressionReport());
             });
         }
 
@@ -67,59 +89,89 @@ namespace Gorpozon.WarehouseSim.UI
 
         private IEnumerator CO_ShowProgressionReport()
         {
-            var longDelay = new WaitForSecondsRealtime(0.5f);
-
-            var lastLevel = progressionManager.Progression.Levels[progressionManager.PreviousLevel];
-            var nextLevel = progressionManager.Progression.Levels[progressionManager.PreviousLevel + 1];
-
+            longDelay = new WaitForSecondsRealtime(0.5f);
+            lerpMultiplier = 1;
             float lerpTime = 0;
-            float lerpDuration = 0.75f;
+            float lerpDuration;
 
-            float relativeRequirement = nextLevel.TotalRequiredGBucks - lastLevel.TotalRequiredGBucks;
-            float relativeStartRank = progressionManager.PreviousRank - lastLevel.TotalRequiredGBucks;
-            float relativeEndRank = progressionManager.TotalRank - nextLevel.TotalRequiredGBucks;
-            float startFill = relativeStartRank / relativeRequirement;
-            float targetFill = relativeEndRank / relativeRequirement;
+            int levelGains = (progressionManager.CurrentLevel - previousLevel) + 1;
+            ProgressionLevel lastLevel = progressionManager.Progression.Levels[previousLevel];
+            ProgressionLevel nextLevel = progressionManager.Progression.Levels[previousLevel + 1];
 
             yield return longDelay;
 
-            while (lerpTime < lerpDuration)
+            for (int i = 0; i < levelGains; i++)
             {
-                lerpTime += Time.unscaledDeltaTime;
-
-                float progress = lerpTime / lerpDuration;
-
-                float rank = Mathf.Lerp(progressionManager.PreviousRank, progressionManager.TotalRank, progress);
-                float money = Mathf.Lerp(progressionManager.PreviousGBucks, progressionManager.CurrentGBucks, progress);
-
-                currentRankText.text = $"{rank:0}";
-                currentFundsText.text = $"$ {money:0}";
-
-                progressBarFill.fillAmount = Mathf.Lerp(startFill, targetFill, progress);
-
                 yield return null;
+
+                if (i > 0)
+                {
+                    previousLevel++;
+                    levelProgress = 0;
+                    previousRank = nextLevel.TotalRequiredGBucks;
+
+                    lastLevel = progressionManager.Progression.Levels[previousLevel];
+                    nextLevel = progressionManager.Progression.Levels[previousLevel + 1];
+                    Setup(lastLevel, nextLevel);
+                }
+
+                float relativeRequirement = nextLevel.TotalRequiredGBucks - lastLevel.TotalRequiredGBucks;
+                float relativeStartRank = previousRank - lastLevel.TotalRequiredGBucks;
+                float relativeEndRank = progressionManager.TotalRank - lastLevel.TotalRequiredGBucks;
+                float startFill = relativeStartRank / relativeRequirement;
+                float targetFill = Mathf.Clamp01(relativeEndRank / relativeRequirement);
+
+                float rankLimit = Mathf.Min(progressionManager.TotalRank, nextLevel.TotalRequiredGBucks);
+
+                lerpTime = 0;
+                lerpDuration = ((targetFill-startFill) / targetFill) * 0.75f * lerpMultiplier;
+
+                if (lerpDuration <= 0)
+                {
+                    lerpDuration = 0.01f;
+                    longDelay = new WaitForSecondsRealtime(0);
+                }
+
+                while (lerpTime <= lerpDuration)
+                {
+                    lerpTime += Time.unscaledDeltaTime;
+
+                    float progress = lerpTime / lerpDuration;
+
+                    float rank = Mathf.Lerp(previousRank, rankLimit, progress);
+                    levelProgress = Mathf.Lerp(startFill, targetFill, progress);
+
+                    currentRankText.text = $"{rank:0}";
+
+                    progressBarFill.fillAmount = levelProgress;
+
+                    yield return null;
+                }
             }
 
+            currentFundsText.text = $"$ {progressionManager.CurrentGBucks:0}";
+
             yield return longDelay;
 
+            previousGBucks = progressionManager.CurrentGBucks;
+            previousLevel = progressionManager.CurrentLevel;
+            previousRank = progressionManager.TotalRank;
+
             continueButton.interactable = true;
+            activeRoutine = null;
         }
 
-        private void Setup(Data.ProgressionLevel lastLevel, Data.ProgressionLevel nextLevel)
+        private void Setup(ProgressionLevel lastLevel, ProgressionLevel nextLevel)
         {
             lastRankText.text = lastLevel.PromotionName;
             nextRankText.text = nextLevel.PromotionName;
             lastThresholdText.text = lastLevel.TotalRequiredGBucks.ToString();
             nextThresholdText.text = nextLevel.TotalRequiredGBucks.ToString();
 
-            currentRankText.text = progressionManager.PreviousRank.ToString();
-            currentFundsText.text = $"$ {progressionManager.PreviousGBucks}";
+            currentRankText.text = previousRank.ToString();
+            currentFundsText.text = $"$ {previousGBucks}";
 
-            float relativeRequirement = nextLevel.TotalRequiredGBucks - lastLevel.TotalRequiredGBucks;
-            float relativeRank = progressionManager.PreviousRank - lastLevel.TotalRequiredGBucks;
-
-            float fill = relativeRank / relativeRequirement;
-            progressBarFill.fillAmount = Mathf.Lerp(lastLevel.TotalRequiredGBucks, nextLevel.TotalRequiredGBucks, fill);
+            progressBarFill.fillAmount = levelProgress;
         }
     }
 }

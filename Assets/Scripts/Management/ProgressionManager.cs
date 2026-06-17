@@ -26,19 +26,12 @@ namespace Gorpozon.WarehouseSim.Management
 
 		public int CurrentGBucks => currentGBucks;
 		public int TotalRank => totalRank;
-		public int PreviousGBucks => previousGBucks;
-		public int PreviousRank => previousRank;
-		public int ProgressionLevel => currentEmployeeLevel;
-		public int PreviousLevel => previousLevel;
+		public int CurrentLevel => currentEmployeeLevel;
 
 		private LevelProgression progression;
 		private int currentEmployeeLevel = 0;
 		private int currentGBucks = 0;
 		private int totalRank = 0;
-
-		private int previousGBucks = 0;
-		private int previousRank = 0;
-		private int previousLevel = 0;
 
         public List<ShippingOrder> GetShiftOrders()
         {
@@ -60,9 +53,6 @@ namespace Gorpozon.WarehouseSim.Management
 
         public int EarnGlorpobux(int amount)
 		{
-			previousGBucks = currentGBucks;
-			previousRank = totalRank;
-
 			currentGBucks += amount;
 			totalRank += amount;
 
@@ -73,14 +63,16 @@ namespace Gorpozon.WarehouseSim.Management
 
 		private int EvaluateEmployeeRank()
 		{
-			if (currentEmployeeLevel + 1 >= Progression.Levels.Count() ||
-				totalRank < Progression.Levels[currentEmployeeLevel+1].TotalRequiredGBucks)
-			{
-                return currentEmployeeLevel;
+			bool levelUp = false;
+
+            while (currentEmployeeLevel + 1 < Progression.Levels.Count() &&
+				   totalRank >= Progression.Levels[currentEmployeeLevel + 1].TotalRequiredGBucks)
+            {
+                currentEmployeeLevel++;
+				levelUp = true;
             }
 
-			previousLevel = currentEmployeeLevel;
-			currentEmployeeLevel++;
+			if (!levelUp) return currentEmployeeLevel;
 
 			OnLevelUp.Invoke(currentEmployeeLevel);
 

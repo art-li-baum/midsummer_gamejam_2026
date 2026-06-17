@@ -1,5 +1,6 @@
 using Gorpozon.WarehouseSim.Data;
 using Gorpozon.WarehouseSim.Management;
+using Gorpozon.WarehouseSim.Objects;
 using Gorpozon.WarehouseSim.UI;
 using SBG.ServiceLocating;
 using System;
@@ -36,7 +37,9 @@ namespace Gorpozon.WarehouseSim.Services
 		}
 
 		public Action<ShippingOrder> OnOrderChanged;
+		public Action OnOrderShipped;
 		public Action OnShiftComplete;
+		public Action OnShiftBegin;
 
         public ShippingOrder CurrentOrder => currentOrder;
 		public int QueuedOrderCount => remainingOrders.Count;
@@ -49,8 +52,12 @@ namespace Gorpozon.WarehouseSim.Services
 		private ProgressionManager progressionManager;
 		private HUD hud;
 
+		private bool shiftOngoing = false;
+
 		public void StartShift()
 		{
+			if (shiftOngoing) return;
+
 			if (progressionManager == null) ServiceLocator.TryGet(out progressionManager);
 
 			var orders = progressionManager.GetShiftOrders();
@@ -61,13 +68,21 @@ namespace Gorpozon.WarehouseSim.Services
             }
 
             orderScores.Clear();
-			currentOrder = remainingOrders.Dequeue();
+
+			shiftOngoing = true;
+            OnShiftBegin?.Invoke();
+
+            currentOrder = remainingOrders.Dequeue();
 			OnOrderChanged?.Invoke(currentOrder);
+
+			GameObject.FindAnyObjectByType<ConveyorBelt>().Next();
 		}
 
 		public void FinishOrder(ShippingOrder.ProductQuantity[] shippedProducts)
 		{
 			if (currentOrder == null) return;
+
+            OnOrderShipped?.Invoke();
 
 			float ratingPercentage = EvaluateOrder(shippedProducts);
 
@@ -80,6 +95,8 @@ namespace Gorpozon.WarehouseSim.Services
 			{
 				currentOrder = null;
                 OnOrderChanged?.Invoke(null);
+
+				shiftOngoing = false;
                 OnShiftComplete?.Invoke();
 
 				int gBucks = orderScores.Select(s => s.GBuckReward).Sum();

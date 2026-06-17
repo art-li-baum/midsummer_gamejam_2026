@@ -27,6 +27,13 @@ namespace Gorpozon.WarehouseSim.Management
 		public int CurrentGBucks => currentGBucks;
 		public int TotalRank => totalRank;
 		public int CurrentLevel => currentEmployeeLevel;
+		public int FreedomRank
+		{
+			get
+			{
+				return progression.Levels[^1].TotalRequiredGBucks;
+			}
+		}
 
 		private LevelProgression progression;
 		private int currentEmployeeLevel = 0;

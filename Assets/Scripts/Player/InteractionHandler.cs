@@ -1,4 +1,5 @@
 using Gorpozon.WarehouseSim.Objects;
+using Gorpozon.WarehouseSim.Services;
 using Gorpozon.WarehouseSim.UI;
 using SBG.ServiceLocating;
 using UnityEngine;
@@ -22,14 +23,18 @@ namespace Gorpozon.WarehouseSim.Player
 
 		private IInteractible currentTarget;
 		private HUD hud;
+        private PlayerService playerService;
 
         private void Start()
         {
 			ServiceLocator.TryGet(out hud);
+			ServiceLocator.TryGet(out playerService);
         }
 
         void Update()
 		{
+            if (playerService.Frozen) return;
+
             if (heldObject != null) UpdateGrabbing();
             else UpdateInteractions();
 		}

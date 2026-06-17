@@ -55,7 +55,7 @@ namespace Gorpozon.WarehouseSim.Objects
                         var shippedContents = currentBox.GetContents();
 
                         currentBoxArrived = true;
-						Destroy(currentBox);
+						Destroy(currentBox.gameObject);
 						currentBox = null;
 
                         shiftManager.FinishOrder(shippedContents);
@@ -75,9 +75,10 @@ namespace Gorpozon.WarehouseSim.Objects
                     nextBox.transform.position += diff.normalized * Time.fixedDeltaTime * beltSpeed;
 					nextBox.transform.LookAt(p);
                 }
-                else if (nextBoxPoint == packingStopIndex)
+                else
                 {
-					nextBoxArrived = true;
+                    if (nextBoxPoint >= packingStopIndex) nextBoxArrived = true;
+                    nextBoxPoint++;
                 }
             }
 

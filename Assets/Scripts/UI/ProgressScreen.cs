@@ -25,7 +25,7 @@ namespace Gorpozon.WarehouseSim.UI
 			packageAmmount.text = "0";
 			shiftAmmount.text = "0";
 
-			progressionManager.levelUpEvent += level => { levelAmmount.text =  (level + 1).ToString(); };
+			progressionManager.OnLevelUp += level => { levelAmmount.text =  (level + 1).ToString(); };
 		
 		}
 

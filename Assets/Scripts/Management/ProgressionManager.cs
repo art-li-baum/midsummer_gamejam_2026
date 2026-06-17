@@ -1,51 +1,82 @@
+using Gorpozon.WarehouseSim.Data;
+using Mono.Cecil;
+using SBG.ServiceLocating;
 using System;
+using System.Collections.Generic;
+using System.Linq;
 using UnityEngine;
-using UnityEngine.Events;
+using Random = UnityEngine.Random;
 
 namespace Gorpozon.WarehouseSim.Management
 {
-	public class ProgressionManager: MonoBehaviour
+	public class ProgressionManager
 	{
-		public UnityAction<int> levelUpEvent;
+		public event Action<int> OnLevelUp;
 
-		public UnityAction endOfShiftEvent;
+        public event Action OnEndOfGame;
 
-		public UnityAction shiftStartEvent;
-
-		public UnityAction endOfGameEvent;
-
-		private int[] levelProgression = new int[] 
+		public LevelProgression Progression
 		{
-			3,
-			8,
-			18,
-			40,
-			85,
-			155
-		};
+			get
+			{
+				if (progression == null) ServiceLocator.TryGet(out progression);
+				return progression;
+			}
+		}
 
+		public int CurrentGBucks => currentGBucks;
+		public int TotalRank => totalRank;
+		public int CurrentLevel => currentEmployeeLevel;
+
+		private LevelProgression progression;
 		private int currentEmployeeLevel = 0;
-		private int currentGlorpobux = 0;
-		private int totalGlorpobux = 0;
+		private int currentGBucks = 0;
+		private int totalRank = 0;
 
-		public int EarnGlorpobux(int ammount)
+        public List<ShippingOrder> GetShiftOrders()
+        {
+			var currentLevel = Progression.Levels[currentEmployeeLevel];
+
+            var options = currentLevel.OrderPool.ToList();
+
+            List<ShippingOrder> selection = new();
+
+            while (selection.Count < currentLevel.OrdersPerShift && options.Count > 0)
+            {
+                int index = Random.Range(0, options.Count);
+                selection.Add(options[index]);
+                options.RemoveAt(index);
+            }
+
+            return selection;
+        }
+
+        public int EarnGlorpobux(int amount)
 		{
-			currentGlorpobux += ammount;
-			totalGlorpobux += ammount;
+			currentGBucks += amount;
+			totalRank += amount;
 
 			EvaluateEmployeeRank();
 
-			return currentGlorpobux;
+			return currentGBucks;
 		}
 
 		private int EvaluateEmployeeRank()
 		{
-			if (totalGlorpobux < levelProgression[currentEmployeeLevel]) 
-				return currentEmployeeLevel;
+			bool levelUp = false;
 
-			currentEmployeeLevel++;
+            while (currentEmployeeLevel + 1 < Progression.Levels.Count() &&
+				   totalRank >= Progression.Levels[currentEmployeeLevel + 1].TotalRequiredGBucks)
+            {
+                currentEmployeeLevel++;
+				levelUp = true;
+            }
 
-			levelUpEvent.Invoke(currentEmployeeLevel);
+			if (!levelUp) return currentEmployeeLevel;
+
+			OnLevelUp.Invoke(currentEmployeeLevel);
+
+			if (currentEmployeeLevel + 1 >= Progression.Levels.Count()) OnEndOfGame?.Invoke();
 
 			return currentEmployeeLevel;
 		}

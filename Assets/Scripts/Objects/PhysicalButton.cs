@@ -8,9 +8,10 @@ namespace Gorpozon.WarehouseSim.Objects
     public class PhysicalButton : MonoBehaviour, IInteractible
     {
         [SerializeField] private float cooldown = 0.15f;
+        [SerializeField] private string prompt = "Press Button";
         [SerializeField] private UnityEvent OnClick;
 
-        public string InteractionPrompt => "Press Button";
+        public string InteractionPrompt => prompt;
 
         public bool CanInteract => active;
 

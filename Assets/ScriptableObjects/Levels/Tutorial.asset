@@ -15,6 +15,15 @@ MonoBehaviour:
   TotalRequiredGBucks: 0
   OrdersPerShift: 3
   PromotionName: Packer in Training
+  LevelIntroduction:
+  - Text: Welcome!
+    MessageDelay: 3
+    Jitter: 0
+    FontSize: 60
+  - Text: 'Press Button to start :]'
+    MessageDelay: 1
+    Jitter: 0
+    FontSize: 60
   OrderPool:
   - {fileID: 11400000, guid: 7b27489aa68a5bf489678193a6d33795, type: 2}
   - {fileID: 11400000, guid: 53c5c7e37bdffda449c9dc6ca8717235, type: 2}

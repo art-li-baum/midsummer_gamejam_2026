@@ -6,7 +6,7 @@ namespace Gorpozon.WarehouseSim.UI
     // Source: https://www.youtube.com/watch?v=FgWVW2PL1bQ
 
     [RequireComponent(typeof(TMP_Text))]
-	public class TextJitter: MonoBehaviour
+	public class TextJitter : MonoBehaviour
 	{
 		[SerializeField] private bool useGradient;
         [SerializeField] private Gradient colorGradient;

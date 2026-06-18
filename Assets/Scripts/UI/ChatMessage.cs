@@ -1,3 +1,4 @@
+using SBG.Pocketwatch;
 using TMPro;
 using UnityEngine;
 
@@ -15,8 +16,12 @@ namespace Gorpozon.WarehouseSim.UI
 
 			if (jitter > 0)
 			{
-                textJitter.enabled = true;
-				textJitter.SetSpeed(jitter);
+				// Make sure font size is updated correctly first
+				this.StartTimer(() =>
+				{
+					textJitter.enabled = true;
+					textJitter.SetSpeed(jitter);
+				}, 0.1f, true);
             }
 		}
 	}

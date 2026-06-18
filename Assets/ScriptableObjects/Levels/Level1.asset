@@ -12,9 +12,26 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fa1ef3796fdb04489a41c2609989e28, type: 3}
   m_Name: Level1
   m_EditorClassIdentifier: 
-  TotalRequiredGBucks: 3
+  TotalRequiredGBucks: 12
   OrdersPerShift: 3
   PromotionName: Junior Packer
+  LevelIntroduction:
+  - Text: You got promoted!! Congrats!! UwU
+    MessageDelay: 3
+    Jitter: 50
+    FontSize: 60
+  - Text: 1
+    MessageDelay: 0.25
+    Jitter: 0
+    FontSize: 60
+  - Text: 2
+    MessageDelay: 0.25
+    Jitter: 0
+    FontSize: 60
+  - Text: 3
+    MessageDelay: 0.25
+    Jitter: 0
+    FontSize: 60
   OrderPool:
   - {fileID: 11400000, guid: 6713b81adc50ac3468e10ee4e3d033c9, type: 2}
   - {fileID: 11400000, guid: 7b27489aa68a5bf489678193a6d33795, type: 2}

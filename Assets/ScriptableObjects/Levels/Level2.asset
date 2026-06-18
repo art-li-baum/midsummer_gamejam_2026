@@ -15,6 +15,15 @@ MonoBehaviour:
   TotalRequiredGBucks: 25
   OrdersPerShift: 4
   PromotionName: Junior Family Member
+  LevelIntroduction:
+  - Text: WOOOW
+    MessageDelay: 1
+    Jitter: 50
+    FontSize: 100
+  - Text: ANOTHER ONE!!
+    MessageDelay: 0.25
+    Jitter: 0
+    FontSize: 0
   OrderPool:
   - {fileID: 11400000, guid: 6713b81adc50ac3468e10ee4e3d033c9, type: 2}
   - {fileID: 11400000, guid: 7b27489aa68a5bf489678193a6d33795, type: 2}

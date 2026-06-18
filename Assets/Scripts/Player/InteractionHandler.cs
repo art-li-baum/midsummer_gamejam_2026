@@ -3,6 +3,7 @@ using Gorpozon.WarehouseSim.Services;
 using Gorpozon.WarehouseSim.UI;
 using SBG.ServiceLocating;
 using UnityEngine;
+using UnityEngine.Audio;
 
 namespace Gorpozon.WarehouseSim.Player
 {
@@ -17,6 +18,9 @@ namespace Gorpozon.WarehouseSim.Player
         [SerializeField] private float defaultHoldDistance = 2f;
         [SerializeField] private float minHoldDistance = 0.5f;
         [SerializeField] private float maxHoldDistance = 4f;
+
+        [SerializeField] private AudioSource sfxPlayer;
+        [SerializeField] private AudioResource grabSound;
 
         private GrabbableObject heldObject;
         private float currentHoldDistance;
@@ -91,6 +95,8 @@ namespace Gorpozon.WarehouseSim.Player
                     currentHoldDistance = defaultHoldDistance;
                     hud.SetInteractionPrompt("Drop");
                     hud.SetInspectControls(true);
+                    sfxPlayer.resource = grabSound;
+                    sfxPlayer.Play();
                 }
                 currentTarget.Interact();
             }

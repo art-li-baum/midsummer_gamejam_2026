@@ -1,48 +1,104 @@
+using Gorpozon.WarehouseSim.Management;
+using Gorpozon.WarehouseSim.Services;
+using SBG.ServiceLocating;
+using System;
 using System.Collections;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Gorpozon.WarehouseSim.UI
 {
-	public class SupervisorScreen : MonoBehaviour
+    [System.Serializable]
+    public class Message
+    {
+        [TextArea]
+        public string Text;
+        [Range(0.25f, 3)]
+        public float MessageDelay = 1f;
+        [Range(0, 50)]
+        public float Jitter = 0;
+        public bool CustomFontSize = false;
+        [Range(60, 100)]
+        public int FontSize = 60;
+    }
+
+    public class SupervisorScreen : MonoBehaviour
 	{
-		[System.Serializable]
-		public class TestMessage
-		{
-			public string message;
-			public float fontSize = 60;
-			[Min(0)]
-			public float jitter = 0;
-		}
-
-		[TextArea]
-		public string firstTestMessage;
-		public string[] testMessages;
-		public TestMessage[] newTestMessages;
-
         [SerializeField] private RectTransform messageParent;
 		[SerializeField] private ChatMessage messagePrefab;
 
+        private Queue<Message> messageQueue = new();
+        private Coroutine messageRoutine;
+
+        private ShiftManager shiftManager;
+        private ProgressionManager progressionManager;
+
         private void Start()
         {
-            StartCoroutine(SendTestMessages());
+            ServiceLocator.TryGet(out shiftManager);
+            ServiceLocator.TryGet(out progressionManager);
+
+            shiftManager.OnShiftComplete += ClearChat;
+            progressionManager.OnLevelUp += OnLevelUp;
+
+            OnLevelUp(0);
         }
 
-        public void SendChatMessage(string message, float fontSize=60, float jitter = 0)
+        private void OnDestroy()
+        {
+            shiftManager.OnShiftComplete -= ClearChat;
+            progressionManager.OnLevelUp -= OnLevelUp;
+        }
+
+        private void OnLevelUp(int lvl)
+        {
+            var intro = progressionManager.Progression.Levels[lvl].LevelIntroduction;
+            if (intro == null || intro.Length == 0) return;
+
+            SendChatMessages(intro);
+        }
+
+        public void SendChatMessages(params Message[] messages)
 		{
-			var messageObj = Instantiate(messagePrefab, messageParent);
-			messageObj.Setup(message, fontSize, jitter);
+            foreach (var msg in messages)
+            {
+                messageQueue.Enqueue(msg);
+            }
+
+            if (messageRoutine == null) messageRoutine = StartCoroutine(SendRoutine());
 		}
 
-		IEnumerator SendTestMessages()
-		{
-            yield return new WaitForSeconds(1);
-			SendChatMessage(firstTestMessage);
+        public void ClearChat()
+        {
+            messageQueue.Clear();
 
-            for (int i = 0; i < newTestMessages.Length; i++)
-			{
-				yield return new WaitForSeconds(1.5f);
-				SendChatMessage(newTestMessages[i].message, newTestMessages[i].fontSize, newTestMessages[i].jitter);
-			}
-		}
+            if (messageRoutine != null)
+            {
+                StopCoroutine(messageRoutine);
+                messageRoutine = null;
+            }
+
+            for (int i = messageParent.childCount - 1; i >= 0; i--)
+            {
+                Destroy(messageParent.GetChild(i).gameObject);
+            }
+        }
+
+        private IEnumerator SendRoutine()
+        {
+            while (messageQueue.Count > 0)
+            {
+                var msg = messageQueue.Dequeue();
+
+                yield return new WaitForSeconds(msg.MessageDelay);
+
+                int fontSize = msg.CustomFontSize ? msg.FontSize : 60;
+
+                var messageObj = Instantiate(messagePrefab, messageParent);
+                messageObj.Setup(msg.Text, fontSize, msg.Jitter);
+            }
+
+            messageRoutine = null;
+        }
 	}
 }

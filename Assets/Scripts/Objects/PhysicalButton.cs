@@ -11,6 +11,8 @@ namespace Gorpozon.WarehouseSim.Objects
         [SerializeField] private string prompt = "Press Button";
         [SerializeField] private UnityEvent OnClick;
 
+        [SerializeField] private AudioSource audioSource;
+
         public string InteractionPrompt => prompt;
 
         public bool CanInteract => active;
@@ -32,6 +34,8 @@ namespace Gorpozon.WarehouseSim.Objects
             OnClick?.Invoke();
 
             active = false;
+
+            audioSource.Play();
 
             this.StartTimer(() => { active = true; }, cooldown);
         }

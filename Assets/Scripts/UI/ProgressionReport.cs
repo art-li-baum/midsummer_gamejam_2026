@@ -33,6 +33,7 @@ namespace Gorpozon.WarehouseSim.UI
 
         private WaitForSecondsRealtime longDelay;
         private float lerpMultiplier;
+        private float lerpDuration;
 
         private Coroutine activeRoutine;
 
@@ -54,7 +55,8 @@ namespace Gorpozon.WarehouseSim.UI
             if (Input.GetMouseButtonDown(0))
             {
                 longDelay = new WaitForSecondsRealtime(0);
-                lerpMultiplier = 0.01f;
+                lerpMultiplier = 0.2f;
+                lerpDuration = 0.1f;
             }
         }
 
@@ -92,7 +94,7 @@ namespace Gorpozon.WarehouseSim.UI
             longDelay = new WaitForSecondsRealtime(0.5f);
             lerpMultiplier = 1;
             float lerpTime = 0;
-            float lerpDuration;
+            lerpDuration = 0;
 
             int levelGains = (progressionManager.CurrentLevel - previousLevel) + 1;
             ProgressionLevel lastLevel = progressionManager.Progression.Levels[previousLevel];

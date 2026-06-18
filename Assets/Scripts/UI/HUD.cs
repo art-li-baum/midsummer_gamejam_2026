@@ -12,7 +12,10 @@ namespace Gorpozon.WarehouseSim.UI
 	public class HUD: MonoBehaviour
 	{
 		[SerializeField] private TextMeshProUGUI promptText;
-		[SerializeField] private CanvasGroup promotionPopup;
+		[SerializeField] private CanvasGroup startMenu;
+		[SerializeField] private CanvasGroup pauseMenu;
+        [SerializeField] private CanvasGroup inGameGroup;
+        [SerializeField] private CanvasGroup promotionPopup;
         [SerializeField] private CanvasGroup interactionPrompt;
 		[SerializeField] private CanvasGroup inspectControlsGroup;
 		[SerializeField] private ShiftReport shiftReport;
@@ -20,6 +23,9 @@ namespace Gorpozon.WarehouseSim.UI
 		[SerializeField] private float controlsAlpha = 0.25f;
 
 		private ProgressionManager progressionManager;
+		private PlayerService playerService;
+
+		private bool pauseMenuActive;
 
         private void Awake()
         {
@@ -29,13 +35,52 @@ namespace Gorpozon.WarehouseSim.UI
         private void Start()
         {
 			ServiceLocator.TryGet(out progressionManager);
-			progressionManager.OnLevelUp += ShowPromotionPopup;
+			ServiceLocator.TryGet(out playerService);
+
+            playerService.SetPause(true);
+
+            progressionManager.OnLevelUp += ShowPromotionPopup;
+        }
+
+        private void Update()
+        {
+			if (Input.GetKeyDown(KeyCode.Escape)) TogglePause();
         }
 
         private void OnDestroy()
         {
 			progressionManager.OnLevelUp -= ShowPromotionPopup;
         }
+
+		public void StartGame()
+		{
+			startMenu.DOKill();
+			inGameGroup.DOKill();
+
+			startMenu.DOFade(0, 2);
+			inGameGroup.DOFade(1, 2);
+
+			startMenu.interactable = false;
+			startMenu.blocksRaycasts = false;
+
+            playerService.SetPause(false);
+        }
+
+		public void TogglePause()
+		{
+			if (!pauseMenuActive && playerService.IsPaused) return;
+
+			pauseMenuActive = !pauseMenuActive;
+
+			float target = pauseMenuActive ? 1 : 0;
+
+			pauseMenu.interactable = pauseMenuActive;
+			pauseMenu.blocksRaycasts = pauseMenuActive;
+			playerService.SetPause(pauseMenuActive);
+
+			pauseMenu.DOKill();
+			pauseMenu.DOFade(target, 0.2f).SetUpdate(true);
+		}
 
         private void ShowPromotionPopup(int lvl)
         {
@@ -60,7 +105,7 @@ namespace Gorpozon.WarehouseSim.UI
 			promptText.text = prompt;
 
             interactionPrompt.DOKill();
-            interactionPrompt.DOFade(controlsAlpha, elementFadeTime);
+            interactionPrompt.DOFade(controlsAlpha, elementFadeTime).SetUpdate(true);
         }
 
 		public void HideInteractionPrompt()
@@ -68,13 +113,13 @@ namespace Gorpozon.WarehouseSim.UI
 			if (interactionPrompt.alpha <= 0) return;
 
             interactionPrompt.DOKill();
-            interactionPrompt.DOFade(0, elementFadeTime);
+            interactionPrompt.DOFade(0, elementFadeTime).SetUpdate(true);
         }
 
 		public void SetInspectControls(bool active)
 		{
 			inspectControlsGroup.DOKill();
-			inspectControlsGroup.DOFade(active ? controlsAlpha : 0, elementFadeTime);
+			inspectControlsGroup.DOFade(active ? controlsAlpha : 0, elementFadeTime).SetUpdate(true);
 		}
 
 		public void ShowShiftReport(ShiftManager.OrderScore[] scores)

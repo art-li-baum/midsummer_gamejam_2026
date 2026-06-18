@@ -51,9 +51,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   viewCamera: {fileID: 7499729973371067440}
-  mouseSensitivity: 10
   pitchMin: -65
-  pitchMax: 65
+  pitchMax: 80
   defaultFOV: 60
   zoomFOV: 40
   zoomLerpRate: 0.1
@@ -77,9 +76,9 @@ MonoBehaviour:
   objectGrabForce: 65
   objectRotationSpeed: 7
   distanceAdjustSpeed: 7
-  defaultHoldDistance: 2
-  minHoldDistance: 1
-  maxHoldDistance: 3
+  defaultHoldDistance: 1.25
+  minHoldDistance: 0.5
+  maxHoldDistance: 3.5
 --- !u!114 &5020139883816498313
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -161,7 +160,7 @@ Camera:
     y: 0
     width: 1
     height: 1
-  near clip plane: 0.3
+  near clip plane: 0.1
   far clip plane: 1000
   field of view: 60
   orthographic: 0
@@ -252,6 +251,10 @@ PrefabInstance:
     - target: {fileID: 6212876376205941675, guid: ca800a9ff645ab24ea2b5e4f1a276fa0, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6212876376205941675, guid: ca800a9ff645ab24ea2b5e4f1a276fa0, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 6212876376205941675, guid: ca800a9ff645ab24ea2b5e4f1a276fa0, type: 3}
       propertyPath: InitialModule.rotation3D
@@ -357,6 +360,10 @@ PrefabInstance:
       value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 103269925042604802, guid: 2c37eeacdfe83f64db6c855dc7efa0d3, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 103269925042604802, guid: 2c37eeacdfe83f64db6c855dc7efa0d3, type: 3}
       propertyPath: InitialModule.rotation3D
       value: 1
       objectReference: {fileID: 0}
@@ -454,6 +461,10 @@ PrefabInstance:
     - target: {fileID: 103269925042604802, guid: 2c37eeacdfe83f64db6c855dc7efa0d3, type: 3}
       propertyPath: playOnAwake
       value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 103269925042604802, guid: 2c37eeacdfe83f64db6c855dc7efa0d3, type: 3}
+      propertyPath: moveWithTransform
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 103269925042604802, guid: 2c37eeacdfe83f64db6c855dc7efa0d3, type: 3}
       propertyPath: InitialModule.rotation3D

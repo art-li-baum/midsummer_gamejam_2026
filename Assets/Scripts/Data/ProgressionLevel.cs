@@ -1,3 +1,4 @@
+using Gorpozon.WarehouseSim.UI;
 using UnityEngine;
 
 namespace Gorpozon.WarehouseSim.Data
@@ -8,6 +9,7 @@ namespace Gorpozon.WarehouseSim.Data
 		public int TotalRequiredGBucks = 1;
 		public int OrdersPerShift = 3;
 		public string PromotionName = "Junior Packer";
+		public Message[] LevelIntroduction;
 		public ShippingOrder[] OrderPool;
     }
 }

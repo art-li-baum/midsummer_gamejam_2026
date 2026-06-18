@@ -60,7 +60,7 @@ namespace Gorpozon.WarehouseSim.Services
 
 			if (progressionManager == null) ServiceLocator.TryGet(out progressionManager);
 
-			var orders = progressionManager.GetShiftOrders();
+            var orders = progressionManager.GetShiftOrders();
 
             foreach (var order in orders)
 			{
@@ -144,7 +144,7 @@ namespace Gorpozon.WarehouseSim.Services
 			int missingItems = Mathf.Max(expectedItems - correctItems, 0);
 			float score = expectedItems - (mismatchedItems + missingItems);
 			float resultPercentage = Mathf.Clamp01(score / expectedItems);
-			int gBucks = Mathf.FloorToInt(resultPercentage * 50); // 1 Buck per 25%
+			int gBucks = Mathf.FloorToInt(resultPercentage * progressionManager.Progression.PayoutPerCorrectOrder);
 
 			int misses = Mathf.Max(missingItems, mismatchedItems);
 

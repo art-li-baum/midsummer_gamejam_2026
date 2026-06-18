@@ -217,7 +217,7 @@ namespace Gorpozon.WarehouseSim.UI
             }
 
             yield return medDelay;
-			if (totalGBucks > 0) totalGbucksText.text = $"<color=green>+ {totalGBucks}</color>";
+			if (totalGBucks > 0) totalGbucksText.text = $"<color=green>$ {totalGBucks}</color>";
 			else totalGbucksText.text = $"$ {totalGBucks}";
 
             yield return longDelay;

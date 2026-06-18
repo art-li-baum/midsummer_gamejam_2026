@@ -70,7 +70,7 @@ namespace Gorpozon.WarehouseSim.UI
 
 		public void RevealGBucks()
 		{
-			gBucksText.text = $"+ {score.GBuckReward}";
+			gBucksText.text = $"$ {score.GBuckReward}";
 		}
 	}
 }

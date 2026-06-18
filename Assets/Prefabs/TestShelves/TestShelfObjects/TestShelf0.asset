@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: TestShelf0
   m_EditorClassIdentifier: 
   items:
-  - {fileID: 5071435321996222736, guid: 5b993d4e1ece9be489290e9c2eee2fd7, type: 3}
-  - {fileID: 5071435321996222736, guid: 5b993d4e1ece9be489290e9c2eee2fd7, type: 3}
-  - {fileID: 5071435321996222736, guid: 5b993d4e1ece9be489290e9c2eee2fd7, type: 3}
-  - {fileID: 5071435321996222736, guid: 5b993d4e1ece9be489290e9c2eee2fd7, type: 3}
+  - {fileID: 3276143368393877420, guid: 78ebdb5b410c5da419daba9c229ab279, type: 3}
+  - {fileID: 7217220567744196866, guid: 4c3318590b9056a439c409f83fd3c17f, type: 3}
+  - {fileID: 7217220567744196866, guid: 4c3318590b9056a439c409f83fd3c17f, type: 3}
+  - {fileID: 3276143368393877420, guid: 78ebdb5b410c5da419daba9c229ab279, type: 3}

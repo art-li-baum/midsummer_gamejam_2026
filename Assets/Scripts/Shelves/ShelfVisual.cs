@@ -75,10 +75,10 @@ namespace Gorpozon.WarehouseSim.Shelves
 			transform.DOMove(startPosition, timing).From();
 		}
 		
-		public void MoveOut(Vector3 endPosition)
+		public void MoveOut(Vector3 endPosition, float time)
 		{
 			transform.DOKill(true);
-			transform.DOMove(endPosition, 1).OnComplete(() =>
+			transform.DOMove(endPosition, time).OnComplete(() =>
 			{
 				ClearShelf();
 				gameObject.SetActive(false);

@@ -1,7 +1,12 @@
+using Gorpozon.WarehouseSim.Management;
+using Gorpozon.WarehouseSim.Services;
 using NUnit.Framework;
+using SBG.Pocketwatch;
+using SBG.ServiceLocating;
 using System;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Net.Security;
 using UnityEngine;
 
 namespace Gorpozon.WarehouseSim.Shelves
@@ -19,9 +24,19 @@ namespace Gorpozon.WarehouseSim.Shelves
 		[SerializeField] private Transform startPosition;
 		[SerializeField] private Transform endPosition;
 
+        [Header("SFX")]
+        [SerializeField] private AudioSource audioSource;
+        [SerializeField] private AudioClip movingSFX;
+        [SerializeField] private AudioClip stoppingSFX;
+
+        private ShiftManager shiftManager;
+        private ProgressionManager progressionManager;
+
         private Vector3 shelfOffset;
 
         private ShelfLevelLoadout currentShelves;
+
+        private const float ROTATE_TIME = 2.0f;
 
 
 		private const int NUM_SHELF_VISUALS = NUMBER_OF_SHELVES * 2;
@@ -34,6 +49,10 @@ namespace Gorpozon.WarehouseSim.Shelves
 
         private void Start()
         {
+            ServiceLocator.TryGet(out shiftManager);
+            shiftManager.OnShiftBegin += OnStartShift;
+            ServiceLocator.TryGet(out progressionManager);
+
 			LoadNewShift(0);
 
 			//populate visual carrosel
@@ -49,11 +68,15 @@ namespace Gorpozon.WarehouseSim.Shelves
 			}
 
             shelfOffset = shelfPositions[0].position - shelfPositions[1].position;
+        }
 
-            LoadNewShift(0);
+        private void OnStartShift()
+        {
+            LoadNewShift(progressionManager.CurrentLevel);
 
             RestockShelves();
         }
+        
 
         private void LoadNewShift(int shift)
 		{
@@ -74,7 +97,13 @@ namespace Gorpozon.WarehouseSim.Shelves
 		{
             ClearShelves();
             LoadShelves();
-		}
+
+            audioSource.PlayOneShot(movingSFX);
+            this.StartTimer(() => 
+            {
+                audioSource.Stop();
+                audioSource.PlayOneShot(stoppingSFX); }, ROTATE_TIME - 0.4f);
+        }
 
 		private void ClearShelves()
 		{
@@ -90,7 +119,7 @@ namespace Gorpozon.WarehouseSim.Shelves
                 if (clearIndex < 0) clearIndex = NUM_SHELF_VISUALS - 1;
 
                 var c = visualShelves[clearIndex];
-                c.MoveOut(endPosition.position - (shelfOffset * (NUMBER_OF_SHELVES - numShelves)));
+                c.MoveOut(endPosition.position - (shelfOffset * (NUMBER_OF_SHELVES - numShelves)), ROTATE_TIME * 2 );
 
                 numShelves--;
             }
@@ -115,7 +144,7 @@ namespace Gorpozon.WarehouseSim.Shelves
 
                 vis.LoadShelf(shelf);
                 //TODO set better timing spacing
-                vis.MoveIn(startPosition.position + (shelfOffset * (NUMBER_OF_SHELVES - numShelves)), shelfPositions[numShelves - 1].position, 1);
+                vis.MoveIn(startPosition.position + (shelfOffset * (NUMBER_OF_SHELVES - numShelves)), shelfPositions[numShelves - 1].position, ROTATE_TIME);
 
                 numShelves--;
                 dataShelfIndex++;

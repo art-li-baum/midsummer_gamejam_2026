@@ -6,10 +6,12 @@ namespace Gorpozon.WarehouseSim.UI
 	public class SupervisorScreen : MonoBehaviour
 	{
 		[System.Serializable]
-		public struct TestMessage
+		public class TestMessage
 		{
 			public string message;
-			public float fontSize;
+			public float fontSize = 60;
+			[Min(0)]
+			public float jitter = 0;
 		}
 
 		[TextArea]
@@ -25,10 +27,10 @@ namespace Gorpozon.WarehouseSim.UI
             StartCoroutine(SendTestMessages());
         }
 
-        public void SendChatMessage(string message, float fontSize=60)
+        public void SendChatMessage(string message, float fontSize=60, float jitter = 0)
 		{
 			var messageObj = Instantiate(messagePrefab, messageParent);
-			messageObj.Setup(message, fontSize);
+			messageObj.Setup(message, fontSize, jitter);
 		}
 
 		IEnumerator SendTestMessages()
@@ -39,7 +41,7 @@ namespace Gorpozon.WarehouseSim.UI
             for (int i = 0; i < newTestMessages.Length; i++)
 			{
 				yield return new WaitForSeconds(1.5f);
-				SendChatMessage(newTestMessages[i].message, newTestMessages[i].fontSize);
+				SendChatMessage(newTestMessages[i].message, newTestMessages[i].fontSize, newTestMessages[i].jitter);
 			}
 		}
 	}

@@ -7,7 +7,6 @@ namespace Gorpozon.WarehouseSim.Player
 	public class PlayerRotationController : MonoBehaviour
 	{
         [SerializeField] private Camera viewCamera;
-        [SerializeField] private float mouseSensitivity = 75;
         [SerializeField] private float pitchMin = -65;
         [SerializeField] private float pitchMax = 65;
         [Space]
@@ -22,14 +21,13 @@ namespace Gorpozon.WarehouseSim.Player
         private void Start()
         {
             ServiceLocator.TryGet(out playerService);
-            playerService.SetCursor(false);
         }
 
         private void Update()
         {
             if (playerService.Frozen) return;
 
-            Vector2 input = Input.mousePositionDelta * mouseSensitivity * Time.deltaTime;
+            Vector2 input = Input.mousePositionDelta * playerService.MouseSensitivity * Time.deltaTime;
 
             cameraPitch -= input.y;
             cameraPitch = Mathf.Clamp(cameraPitch, pitchMin, pitchMax);

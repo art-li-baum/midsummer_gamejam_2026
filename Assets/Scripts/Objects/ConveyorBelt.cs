@@ -17,6 +17,7 @@ namespace Gorpozon.WarehouseSim.Objects
         [SerializeField] private float beltSpeed = 5;
 		[SerializeField] private int packingStopIndex = 3;
 		[SerializeField] private Transform[] path;
+        [SerializeField] private AudioSource audioSource;
 
 		private Package currentBox;
 		private Package nextBox;
@@ -87,6 +88,7 @@ namespace Gorpozon.WarehouseSim.Objects
                 isLerpingBoxes = false;
                 currentBox = nextBox;
                 currentBoxPoint = nextBoxPoint;
+                audioSource.Stop();
             }
         }
 
@@ -104,6 +106,8 @@ namespace Gorpozon.WarehouseSim.Objects
             {
                 SpawnAndLerpBoxes(order);
             }
+
+            audioSource.Play();
         }
 
         private void SpawnAndLerpBoxes(ShippingOrder nextOrder)

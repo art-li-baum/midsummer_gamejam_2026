@@ -27,6 +27,8 @@ namespace Gorpozon.WarehouseSim.UI
         [SerializeField] private RectTransform messageParent;
 		[SerializeField] private ChatMessage messagePrefab;
 
+        [SerializeField] private AudioSource notificationSFX;
+
         private Queue<Message> messageQueue = new();
         private Coroutine messageRoutine;
 
@@ -96,6 +98,8 @@ namespace Gorpozon.WarehouseSim.UI
 
                 var messageObj = Instantiate(messagePrefab, messageParent);
                 messageObj.Setup(msg.Text, fontSize, msg.Jitter);
+
+                notificationSFX.Play();
             }
 
             messageRoutine = null;

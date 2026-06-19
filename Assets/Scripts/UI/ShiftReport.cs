@@ -25,6 +25,7 @@ namespace Gorpozon.WarehouseSim.UI
         [SerializeField] private TextMeshProUGUI totalGbucksText;
 
         [SerializeField] private AudioClip tickClip;
+        [SerializeField] private AudioClip cashClip;
 
         private List<OrderScoreEntry> activeScoreEntries = new();
 
@@ -49,8 +50,6 @@ namespace Gorpozon.WarehouseSim.UI
         {
             ServiceLocator.TryGet(out playerService);
             audioSource = gameObject.AddComponent(typeof(AudioSource)) as AudioSource;
-            audioSource.resource = tickClip;
-            audioSource.loop = true;
         }
 
         private void Update()
@@ -121,6 +120,9 @@ namespace Gorpozon.WarehouseSim.UI
             shortDelay = new WaitForSecondsRealtime(0.1f);
             medDelay = new WaitForSecondsRealtime(0.3f);
             longDelay = new WaitForSecondsRealtime(0.5f);
+
+            audioSource.resource = tickClip;
+            audioSource.loop = true;
 
             yield return longDelay;
 
@@ -249,8 +251,15 @@ namespace Gorpozon.WarehouseSim.UI
             audioSource.Stop();
 
             yield return medDelay;
-			if (totalGBucks > 0) totalGbucksText.text = $"<color=green>$ {totalGBucks}</color>";
-			else totalGbucksText.text = $"$ {totalGBucks}";
+            if (totalGBucks > 0)
+            {
+                audioSource.loop = false;
+                audioSource.resource = cashClip;
+                audioSource.Play();
+
+                totalGbucksText.text = $"<color=green>$ {totalGBucks}</color>";
+            }
+            else totalGbucksText.text = $"$ {totalGBucks}";
 
             yield return longDelay;
 

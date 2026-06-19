@@ -1,6 +1,7 @@
 using UnityEngine;
 using System.Collections.Generic;
 using DG.Tweening;
+using Gorpozon.WarehouseSim.Services;
 
 namespace Gorpozon.WarehouseSim.Shelves
 {
@@ -14,7 +15,7 @@ namespace Gorpozon.WarehouseSim.Shelves
 		private Vector3 ORIGIN = new Vector3(-1.3f, 1.3f, -0.5f);
 
 
-        public void LoadShelf(ShelfData data)
+        public void LoadShelf(ShelfData data, PoolService poolService)
 		{
 			shelfData = data;
 
@@ -42,7 +43,7 @@ namespace Gorpozon.WarehouseSim.Shelves
 
 				slots.Add(i);
 
-				i.Initialize(item);
+				i.Initialize(item, poolService);
 
 				row++;
 
@@ -68,13 +69,13 @@ namespace Gorpozon.WarehouseSim.Shelves
 
 			transform.position = position;
 			transform.DOKill(true);
-			transform.DOMove(startPosition, timing).From();
+			transform.DOMove(startPosition, timing).From().SetEase(Ease.Linear);
 		}
 		
 		public void MoveOut(Vector3 endPosition, float time)
 		{
 			transform.DOKill(true);
-			transform.DOMove(endPosition, time).OnComplete(() =>
+			transform.DOMove(endPosition, time).SetEase(Ease.Linear).OnComplete(() =>
 			{
 				ClearShelf();
 				gameObject.SetActive(false);

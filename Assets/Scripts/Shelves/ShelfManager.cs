@@ -1,12 +1,8 @@
 using Gorpozon.WarehouseSim.Management;
 using Gorpozon.WarehouseSim.Services;
-using NUnit.Framework;
 using SBG.Pocketwatch;
 using SBG.ServiceLocating;
-using System;
 using System.Collections.Generic;
-using System.Globalization;
-using System.Net.Security;
 using UnityEngine;
 
 namespace Gorpozon.WarehouseSim.Shelves
@@ -23,6 +19,7 @@ namespace Gorpozon.WarehouseSim.Shelves
 		[SerializeField] private Transform[] shelfPositions = new Transform[NUMBER_OF_SHELVES];
 		[SerializeField] private Transform startPosition;
 		[SerializeField] private Transform endPosition;
+        [SerializeField] private ParticleSystem conveyorParticles;
 
         [Header("SFX")]
         [SerializeField] private AudioSource audioSource;
@@ -36,7 +33,7 @@ namespace Gorpozon.WarehouseSim.Shelves
 
         private ShelfLevelLoadout currentShelves;
 
-        private const float ROTATE_TIME = 0.75f;
+        private const float ROTATE_TIME = 1f;
 
 
 		private const int NUM_SHELF_VISUALS = NUMBER_OF_SHELVES * 2;
@@ -49,13 +46,19 @@ namespace Gorpozon.WarehouseSim.Shelves
 
         private bool allowRotation = true;
 
+        private PoolService poolService;
+
         private void Start()
         {
             ServiceLocator.TryGet(out shiftManager);
             shiftManager.OnShiftBegin += OnStartShift;
             ServiceLocator.TryGet(out progressionManager);
+            ServiceLocator.TryGet(out poolService);
 
-			LoadNewShift(0);
+            conveyorParticles.Pause();
+
+
+            LoadNewShift(0);
 
 			//populate visual carrosel
 			for(int i = 0; i < NUM_SHELF_VISUALS; ++i)
@@ -69,7 +72,7 @@ namespace Gorpozon.WarehouseSim.Shelves
                 visualShelves[i] = shelf;
 			}
 
-            shelfOffset = shelfPositions[0].position - shelfPositions[1].position;
+            shelfOffset = shelfPositions[1].position - shelfPositions[0].position;
         }
 
         private void OnStartShift()
@@ -101,6 +104,8 @@ namespace Gorpozon.WarehouseSim.Shelves
 
             allowRotation = false;
 
+            conveyorParticles.Play();
+
             ClearShelves();
             LoadShelves();
 
@@ -112,7 +117,12 @@ namespace Gorpozon.WarehouseSim.Shelves
 
             }, ROTATE_TIME - 0.4f);
 
-            this.StartTimer(() => allowRotation = true, ROTATE_TIME * 2);
+            this.StartTimer(() =>
+            {
+                allowRotation = true;
+                conveyorParticles.Pause();
+
+            }, ROTATE_TIME);
         }
 
 		private void ClearShelves()
@@ -129,7 +139,7 @@ namespace Gorpozon.WarehouseSim.Shelves
                 if (clearIndex < 0) clearIndex = NUM_SHELF_VISUALS - 1;
 
                 var c = visualShelves[clearIndex];
-                c.MoveOut(endPosition.position - (shelfOffset * (NUMBER_OF_SHELVES - numShelves)), ROTATE_TIME * 2 );
+                c.MoveOut(endPosition.position - (shelfOffset * (NUMBER_OF_SHELVES - numShelves)), ROTATE_TIME);
 
                 numShelves--;
             }
@@ -152,7 +162,7 @@ namespace Gorpozon.WarehouseSim.Shelves
                 var shelf = totalShelves[dataShelfIndex];
                 var vis = visualShelves[visualShelfIndex];
 
-                vis.LoadShelf(shelf);
+                vis.LoadShelf(shelf, poolService);
                 //TODO set better timing spacing
                 vis.MoveIn(startPosition.position + (shelfOffset * i), shelfPositions[i].position, ROTATE_TIME);
 

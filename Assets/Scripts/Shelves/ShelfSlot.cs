@@ -1,7 +1,6 @@
 using UnityEngine;
 using Gorpozon.WarehouseSim.Objects;
 using Gorpozon.WarehouseSim.Services;
-using SBG.ServiceLocating;
 
 namespace Gorpozon.WarehouseSim.Shelves
 {
@@ -16,18 +15,26 @@ namespace Gorpozon.WarehouseSim.Shelves
 
 		private PoolService poolService;
 
-		public void Initialize(GrabbableObject obj)
+		public void Initialize(GrabbableObject obj, PoolService poolService)
 		{
-			ServiceLocator.TryGet(out poolService);
+            this.poolService = poolService;
 
-			stockedItemPrefab = obj;
+            stockedItemPrefab = obj;
 
 			Refresh();
 		}
        
 		public void Refresh()
 		{
-			instancedItem = poolService.GetProduct(stockedItemPrefab.ProductData.name, stockedItemPrefab);
+			if (stockedItemPrefab.ProductData == null)
+			{
+				isStocked = false;
+				Debug.LogWarning($"Unsassigned Product on Prefab {stockedItemPrefab.name}");
+				return;
+			}
+
+
+            instancedItem = poolService.GetProduct(stockedItemPrefab.ProductData.name, stockedItemPrefab);
             instancedItem.HangOnShelf(this);
 
 			isStocked = true;

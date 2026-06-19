@@ -6,6 +6,7 @@ namespace Gorpozon.WarehouseSim.Data
 	public class Product : ScriptableObject
 	{
 		public string DisplayName;
+		public string Brand;
 		[Min(0)]
 		public float Price;
 		[TextArea]

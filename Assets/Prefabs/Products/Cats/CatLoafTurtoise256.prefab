@@ -220,7 +220,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efaa1a62a538e0468c48fc3146c5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProductData: {fileID: 11400000, guid: d7017ac5c09d2c642b4ef132eca2fc64, type: 2}
+  ProductData: {fileID: 0}
 --- !u!64 &2311504705653296784
 MeshCollider:
   m_ObjectHideFlags: 0

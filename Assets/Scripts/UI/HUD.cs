@@ -1,10 +1,8 @@
 using DG.Tweening;
 using Gorpozon.WarehouseSim.Management;
 using Gorpozon.WarehouseSim.Services;
-using log4net.Core;
 using SBG.Pocketwatch;
 using SBG.ServiceLocating;
-using System;
 using TMPro;
 using UnityEngine;
 

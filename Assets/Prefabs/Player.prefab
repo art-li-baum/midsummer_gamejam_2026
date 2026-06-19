@@ -392,6 +392,8 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   musicPlayer: {fileID: 4101745487877747688}
   sfxPlayer: {fileID: 3376940672442185827}
+  musicClip: {fileID: 8300000, guid: 706fc378a0294344091e4e4ccf9bcb90, type: 3}
+  resultClip: {fileID: 8300000, guid: a073712c9b8a13c46b9e026d7523abec, type: 3}
   startSound: {fileID: 8300000, guid: 74facdf4477908d4ba4f8c1727ad6ac9, type: 3}
   endSound: {fileID: 8300000, guid: a6b6d8c74d5cef9489bd4ad298ec5b56, type: 3}
 --- !u!82 &4101745487877747688
@@ -405,8 +407,8 @@ AudioSource:
   serializedVersion: 4
   OutputAudioMixerGroup: {fileID: -2264458174963957024, guid: 1c4480de98d97654095654d1aff8de6c, type: 2}
   m_audioClip: {fileID: 0}
-  m_Resource: {fileID: 8300000, guid: 706fc378a0294344091e4e4ccf9bcb90, type: 3}
-  m_PlayOnAwake: 0
+  m_Resource: {fileID: 8300000, guid: a073712c9b8a13c46b9e026d7523abec, type: 3}
+  m_PlayOnAwake: 1
   m_Volume: 1
   m_Pitch: 1
   Loop: 1

@@ -38,6 +38,7 @@ namespace Gorpozon.WarehouseSim.Services
 
         private void OnDestroy(GrabbableObject grabbable)
         {
+			if (grabbable == null) return;
 			GameObject.Destroy(grabbable.gameObject);
         }
 

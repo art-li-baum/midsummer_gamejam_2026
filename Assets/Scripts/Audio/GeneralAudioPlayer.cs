@@ -9,7 +9,12 @@ namespace Gorpozon.WarehouseSim.Audio
 		[SerializeField] private AudioSource musicPlayer;
 		[SerializeField] private AudioSource sfxPlayer;
 
+		[Header("Music")]
+		[SerializeField] private AudioClip musicClip;
+		[SerializeField] private AudioClip resultClip;
 
+
+		[Header("ShiftSounds")]
 		[SerializeField] private AudioClip startSound;
         [SerializeField] private AudioClip endSound;
 
@@ -27,6 +32,7 @@ namespace Gorpozon.WarehouseSim.Audio
 	
 		private void OnShiftStart()
 		{
+			musicPlayer.resource = musicClip;
 			musicPlayer.Play();
 			sfxPlayer.PlayOneShot(startSound);
 		}
@@ -34,6 +40,8 @@ namespace Gorpozon.WarehouseSim.Audio
 		private void OnShiftEnd()
 		{
 			musicPlayer.Stop();
+			musicPlayer.resource = resultClip;
+			musicPlayer.Play();
 			sfxPlayer.PlayOneShot(endSound);
 		}
 	}

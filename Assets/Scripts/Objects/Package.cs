@@ -16,6 +16,12 @@ namespace Gorpozon.WarehouseSim.Objects
         [SerializeField] private LayerMask lidCheckMask;
         [SerializeField] private float animationDelay = 0.6f;
 
+        [Header("SFX")]
+        [SerializeField] private AudioSource sfxPlayer;
+        [SerializeField] private AudioClip addItemSFX;
+        [SerializeField] private AudioClip closeBoxSFX;
+        [SerializeField] private AudioClip cantCloseSFX;
+
         private List<GrabbableObject> heldObjects = new();
 
         private Animator anim;
@@ -29,7 +35,11 @@ namespace Gorpozon.WarehouseSim.Objects
         private void OnTriggerEnter(Collider other)
         {
             var grabbable = other.GetComponent<GrabbableObject>();
-            if (grabbable != null) heldObjects.Add(grabbable);
+            if (grabbable != null)
+            {
+                heldObjects.Add(grabbable);
+                sfxPlayer.PlayOneShot(addItemSFX);
+            }
         }
 
         private void OnTriggerExit(Collider other)
@@ -47,7 +57,11 @@ namespace Gorpozon.WarehouseSim.Objects
             if (hits != null && hits.Length > 0)
             {
                 anim.SetTrigger("FailedClose");
-                if (onFail != null) callbackTimer = this.StartTimer(onFail, animationDelay);
+                if (onFail != null)
+                {
+                    callbackTimer = this.StartTimer(onFail, animationDelay);
+                    sfxPlayer.PlayOneShot(cantCloseSFX);
+                }
             }
             else
             {
@@ -57,7 +71,11 @@ namespace Gorpozon.WarehouseSim.Objects
                 }
 
                 anim.SetTrigger("Close");
-                if (onSuccess != null) callbackTimer = this.StartTimer(onSuccess, animationDelay);
+                if (onSuccess != null)
+                {
+                    sfxPlayer.PlayOneShot(closeBoxSFX);
+                    callbackTimer = this.StartTimer(onSuccess, animationDelay);
+                }
             }
         }
 

@@ -34,9 +34,9 @@ namespace Gorpozon.WarehouseSim.matrerialeffects
                 if (crackvalue < 1f)
                 {
                     crackvalue = crackvalue + crackIntestisty;
-					if(crackvalue>1)
+					if(crackvalue> 1)
 					{
-						crackvalue =1f;
+						crackvalue = 1f;
 					}
 					material.SetFloat("_crackvalue", crackvalue);
                 }

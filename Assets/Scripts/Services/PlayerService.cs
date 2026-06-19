@@ -30,7 +30,7 @@ namespace Gorpozon.WarehouseSim.Services
 
 		public void SetMouseSensitivity(float mouseSensitivity)
 		{
-			this.mouseSensitivity = Mathf.Clamp(mouseSensitivity, 1, MaxSensitivity);
+			this.mouseSensitivity = Mathf.Lerp(1, MaxSensitivity, mouseSensitivity);
 		}
 	}
 }

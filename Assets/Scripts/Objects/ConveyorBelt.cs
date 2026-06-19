@@ -18,6 +18,7 @@ namespace Gorpozon.WarehouseSim.Objects
 		[SerializeField] private int packingStopIndex = 3;
 		[SerializeField] private Transform[] path;
         [SerializeField] private AudioSource audioSource;
+        [SerializeField] private ParticleSystem particleSystem;
 
 		private Package currentBox;
 		private Package nextBox;
@@ -32,6 +33,8 @@ namespace Gorpozon.WarehouseSim.Objects
         private void Start()
         {
             ServiceLocator.TryGet(out shiftManager);
+
+            particleSystem.Pause();
         }
 
         private void FixedUpdate()
@@ -53,6 +56,12 @@ namespace Gorpozon.WarehouseSim.Objects
 					currentBoxPoint++;
 					if (currentBoxPoint >= path.Length)
 					{
+                        if (nextBox == null)
+                        {
+                            particleSystem.Pause();
+                            audioSource.Stop();
+                        }
+
                         var shippedContents = currentBox.GetContents();
 
                         currentBoxArrived = true;
@@ -78,7 +87,13 @@ namespace Gorpozon.WarehouseSim.Objects
                 }
                 else
                 {
-                    if (nextBoxPoint >= packingStopIndex) nextBoxArrived = true;
+                    if (nextBoxPoint >= packingStopIndex)
+                    {
+                        nextBoxArrived = true;
+                        particleSystem.Pause();
+                        audioSource.Stop();
+                    }
+
                     nextBoxPoint++;
                 }
             }
@@ -88,7 +103,6 @@ namespace Gorpozon.WarehouseSim.Objects
                 isLerpingBoxes = false;
                 currentBox = nextBox;
                 currentBoxPoint = nextBoxPoint;
-                audioSource.Stop();
             }
         }
 
@@ -106,12 +120,13 @@ namespace Gorpozon.WarehouseSim.Objects
             {
                 SpawnAndLerpBoxes(order);
             }
-
-            audioSource.Play();
         }
 
         private void SpawnAndLerpBoxes(ShippingOrder nextOrder)
 		{
+            audioSource.UnPause();
+            particleSystem.Play();
+
             if (nextOrder != null && shiftManager.QueuedOrderCount > 0)
             {
                 switch (nextOrder.BoxSize)

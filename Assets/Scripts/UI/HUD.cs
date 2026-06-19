@@ -16,6 +16,7 @@ namespace Gorpozon.WarehouseSim.UI
 		[SerializeField] private CanvasGroup startMenu;
 		[SerializeField] private CanvasGroup pauseMenu;
 		[SerializeField] private CanvasGroup endScreen;
+		[SerializeField] private CanvasGroup creditsScreen;
         [SerializeField] private CanvasGroup inGameGroup;
         [SerializeField] private CanvasGroup promotionPopup;
         [SerializeField] private CanvasGroup interactionPrompt;
@@ -88,9 +89,18 @@ namespace Gorpozon.WarehouseSim.UI
 
         private void ShowEndScreen()
         {
-            endScreen.alpha = 1;
+			endScreen.DOKill();
+            endScreen.DOFade(1, 1).SetUpdate(true);
 			endScreen.interactable = true;
 			endScreen.blocksRaycasts = true;
+        }
+
+        public void ShowCreditsScreen()
+        {
+            creditsScreen.DOKill();
+            creditsScreen.DOFade(1, 1f).SetUpdate(true);
+            creditsScreen.interactable = true;
+            creditsScreen.blocksRaycasts = true;
         }
 
         private void ShowPromotionPopup(int lvl)

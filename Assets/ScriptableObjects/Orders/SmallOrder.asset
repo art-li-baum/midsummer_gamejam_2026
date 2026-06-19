@@ -14,5 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   BoxSize: 2
   Products:
-  - Product: {fileID: 11400000, guid: edf538aecfb7e2b4cbe3ee84518c8194, type: 2}
+  - Product: {fileID: 11400000, guid: 88b1b168f70a2ba4eaacf5850754178f, type: 2}
     Amount: 1

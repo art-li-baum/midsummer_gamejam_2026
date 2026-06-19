@@ -124,7 +124,7 @@ namespace Gorpozon.WarehouseSim.Objects
 
         private void SpawnAndLerpBoxes(ShippingOrder nextOrder)
 		{
-            audioSource.UnPause();
+            audioSource.Play();
             particleSystem.Play();
 
             if (nextOrder != null && shiftManager.QueuedOrderCount > 0)

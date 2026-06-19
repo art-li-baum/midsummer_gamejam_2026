@@ -13,6 +13,5 @@ MonoBehaviour:
   m_Name: 1_ShelfLoadout
   m_EditorClassIdentifier: 
   shelvesInShift:
-  - {fileID: 11400000, guid: 6184867db37fe0540bb9c48bd51dd886, type: 2}
-  - {fileID: 11400000, guid: 80f4b8bf4efec814e999203623b7acc1, type: 2}
-  - {fileID: 11400000, guid: 7482c391704b041499065657a94a0d47, type: 2}
+  - {fileID: 11400000, guid: 1394265ea533a93478e8d02ee17bbfa7, type: 2}
+  - {fileID: 11400000, guid: 16a325eb65253ac46972e3c29b5f164b, type: 2}

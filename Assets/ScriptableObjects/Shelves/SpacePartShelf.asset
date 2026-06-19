@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78492a855108be140ae512f6ce18bdb8, type: 3}
+  m_Name: SpacePartShelf
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 9156466343696571902, guid: 7219965048bf5fc48a545256d14a5e5a, type: 3}
+  - {fileID: 2836341276516293341, guid: 90e1086b8930ad344a111e57e95027b1, type: 3}
+  - {fileID: 9156466343696571902, guid: 7219965048bf5fc48a545256d14a5e5a, type: 3}
+  - {fileID: 2836341276516293341, guid: 90e1086b8930ad344a111e57e95027b1, type: 3}

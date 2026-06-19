@@ -2370,6 +2370,10 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 4783596263128191859, guid: 639dd204110c7de47bcb347b5d6b86c0, type: 3}
+      propertyPath: tickClip
+      value: 
+      objectReference: {fileID: 8300000, guid: bf8342de412b3df41a3cbce24a279b7a, type: 3}
     - target: {fileID: 5267308429587737733, guid: 639dd204110c7de47bcb347b5d6b86c0, type: 3}
       propertyPath: m_Name
       value: HUD

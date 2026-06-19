@@ -5071,6 +5071,8 @@ MonoBehaviour:
   totalPenaltyText: {fileID: 9131935332675516459}
   totalScoreText: {fileID: 6277211296353348524}
   totalGbucksText: {fileID: 6398267948792951555}
+  tickClip: {fileID: 8300000, guid: bf8342de412b3df41a3cbce24a279b7a, type: 3}
+  cashClip: {fileID: 8300000, guid: a951117671d42124d9344070756bf5da, type: 3}
 --- !u!1 &5171726572392694035
 GameObject:
   m_ObjectHideFlags: 0

@@ -21,10 +21,11 @@ namespace Gorpozon.WarehouseSim.Player
 
         private void SpawnConfetti(int lvl)
         {
+            sfxPlayer.Play();
+
             foreach (var particle in Particles)
 			{
 				particle.Play();
-				sfxPlayer.Play();
 			}
         }
 

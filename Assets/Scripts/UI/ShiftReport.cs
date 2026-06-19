@@ -24,6 +24,9 @@ namespace Gorpozon.WarehouseSim.UI
         [SerializeField] private TextMeshProUGUI totalScoreText;
         [SerializeField] private TextMeshProUGUI totalGbucksText;
 
+        [SerializeField] private AudioClip tickClip;
+        [SerializeField] private AudioClip cashClip;
+
         private List<OrderScoreEntry> activeScoreEntries = new();
 
 		private CanvasGroup group;
@@ -36,6 +39,8 @@ namespace Gorpozon.WarehouseSim.UI
         private WaitForSecondsRealtime longDelay;
         private float lerpMultiplier;
 
+        private AudioSource audioSource;
+
         private void Awake()
         {
             group = GetComponent<CanvasGroup>();
@@ -44,6 +49,7 @@ namespace Gorpozon.WarehouseSim.UI
         private void Start()
         {
             ServiceLocator.TryGet(out playerService);
+            audioSource = gameObject.AddComponent(typeof(AudioSource)) as AudioSource;
         }
 
         private void Update()
@@ -115,6 +121,9 @@ namespace Gorpozon.WarehouseSim.UI
             medDelay = new WaitForSecondsRealtime(0.3f);
             longDelay = new WaitForSecondsRealtime(0.5f);
 
+            audioSource.resource = tickClip;
+            audioSource.loop = true;
+
             yield return longDelay;
 
 			for (int i = 0; i < scores.Length; i++)
@@ -144,12 +153,18 @@ namespace Gorpozon.WarehouseSim.UI
                 lerpTime = 0;
                 lerpDuration = Mathf.Max(score.Penalty * 0.25f, 0.1f) * lerpMultiplier;
 
+                audioSource.pitch = 1.0f;
+                audioSource.Play();
+
                 while (lerpTime < lerpDuration)
                 {
                     lerpTime += Time.unscaledDeltaTime;
                     entry.LerpPenalty(lerpTime / lerpDuration);
+                    audioSource.pitch += 10 * Time.deltaTime;
                     yield return null;
                 }
+
+                audioSource.Stop();
 
                 yield return medDelay;
 
@@ -157,12 +172,18 @@ namespace Gorpozon.WarehouseSim.UI
                 lerpTime = 0;
                 lerpDuration = Mathf.Max(score.Percentage * 0.25f, 0.1f) * lerpMultiplier;
 
-				while (lerpTime < lerpDuration)
+                audioSource.pitch = 1.0f;
+                audioSource.Play();
+
+                while (lerpTime < lerpDuration)
 				{
 					lerpTime += Time.unscaledDeltaTime;
 					entry.LerpScore(lerpTime / lerpDuration);
+                    audioSource.pitch += Time.deltaTime;
 					yield return null;
 				}
+
+                audioSource.Stop();
 
                 yield return medDelay;
 
@@ -186,14 +207,20 @@ namespace Gorpozon.WarehouseSim.UI
             lerpTime = 0;
             lerpDuration = Mathf.Max(avgPenalty * 0.25f, 0.1f) * lerpMultiplier;
 
+            audioSource.pitch = 1.0f;
+            audioSource.Play();
+
             while (lerpTime < lerpDuration)
             {
                 lerpTime += Time.unscaledDeltaTime;
                 float current = Mathf.Lerp(0, avgPenalty * 100, lerpTime / lerpDuration);
+                audioSource.pitch += 10 * Time.deltaTime;
 
                 totalPenaltyText.text = $"<color=red>- {current:0} %</color>";
                 yield return null;
             }
+
+            audioSource.Stop();
 
             yield return medDelay;
 
@@ -201,11 +228,16 @@ namespace Gorpozon.WarehouseSim.UI
             lerpTime = 0;
             lerpDuration = Mathf.Max(avgScore * 0.25f, 0.1f) * lerpMultiplier;
 
+            audioSource.pitch = 1.0f;
+            audioSource.Play();
+
             while (lerpTime < lerpDuration)
             {
                 lerpTime += Time.unscaledDeltaTime;
                 float current = Mathf.Lerp(0, avgScore * 100, lerpTime / lerpDuration);
-				
+
+                audioSource.pitch += 10 * Time.deltaTime;
+
 				string color;
 
 				if (current < 25f) color = "red";
@@ -216,9 +248,18 @@ namespace Gorpozon.WarehouseSim.UI
                 yield return null;
             }
 
+            audioSource.Stop();
+
             yield return medDelay;
-			if (totalGBucks > 0) totalGbucksText.text = $"<color=green>$ {totalGBucks}</color>";
-			else totalGbucksText.text = $"$ {totalGBucks}";
+            if (totalGBucks > 0)
+            {
+                audioSource.loop = false;
+                audioSource.resource = cashClip;
+                audioSource.Play();
+
+                totalGbucksText.text = $"<color=green>$ {totalGBucks}</color>";
+            }
+            else totalGbucksText.text = $"$ {totalGBucks}";
 
             yield return longDelay;
 

@@ -15,3 +15,5 @@ MonoBehaviour:
   items:
   - {fileID: 547328403424423619, guid: 4dcebf76f5a5b75489c28e4978421fc9, type: 3}
   - {fileID: 5207952360621588142, guid: 80625ee27bbddd34a82fb0ec4114dcb1, type: 3}
+  - {fileID: 5207952360621588142, guid: 80625ee27bbddd34a82fb0ec4114dcb1, type: 3}
+  - {fileID: 547328403424423619, guid: 4dcebf76f5a5b75489c28e4978421fc9, type: 3}

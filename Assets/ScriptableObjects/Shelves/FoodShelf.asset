@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78492a855108be140ae512f6ce18bdb8, type: 3}
+  m_Name: FoodShelf
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 547328403424423619, guid: 4dcebf76f5a5b75489c28e4978421fc9, type: 3}
+  - {fileID: 5207952360621588142, guid: 80625ee27bbddd34a82fb0ec4114dcb1, type: 3}
+  - {fileID: 5207952360621588142, guid: 80625ee27bbddd34a82fb0ec4114dcb1, type: 3}
+  - {fileID: 547328403424423619, guid: 4dcebf76f5a5b75489c28e4978421fc9, type: 3}
+  - {fileID: 6254892697331958304, guid: d8387d661b72e7f46b8cc5fa76bec257, type: 3}
+  - {fileID: 5542668704625821007, guid: aaaf84c6b73ce0147befb9b4d6acccae, type: 3}

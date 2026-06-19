@@ -1,0 +1,19 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78492a855108be140ae512f6ce18bdb8, type: 3}
+  m_Name: ToyShelf
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: -8315470085705744838, guid: 6f707ae4e44cba047afe4c2dc4fe632a, type: 3}
+  - {fileID: 1932140431297444364, guid: 6f41bde5c64f3924fa870dd4e157d374, type: 3}
+  - {fileID: 3707675835047510299, guid: 3472f0721ebff0441bf0b71b95d7a409, type: 3}
+  - {fileID: 6487325134039155553, guid: c99b7a2ca20a4554b8c89d3afc78699e, type: 3}

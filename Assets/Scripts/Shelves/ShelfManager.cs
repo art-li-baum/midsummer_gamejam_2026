@@ -36,7 +36,7 @@ namespace Gorpozon.WarehouseSim.Shelves
 
         private ShelfLevelLoadout currentShelves;
 
-        private const float ROTATE_TIME = 2.0f;
+        private const float ROTATE_TIME = 0.75f;
 
 
 		private const int NUM_SHELF_VISUALS = NUMBER_OF_SHELVES * 2;
@@ -46,6 +46,8 @@ namespace Gorpozon.WarehouseSim.Shelves
 
 		private int dataShelfIndex = 0;
 		private int dataShelfTotal;
+
+        private bool allowRotation = true;
 
         private void Start()
         {
@@ -95,7 +97,9 @@ namespace Gorpozon.WarehouseSim.Shelves
 
 		public void RestockShelves()
 		{
-            if (!shiftManager.ShiftOngoing) return;
+            if (!shiftManager.ShiftOngoing || !allowRotation) return;
+
+            allowRotation = false;
 
             ClearShelves();
             LoadShelves();
@@ -105,7 +109,10 @@ namespace Gorpozon.WarehouseSim.Shelves
             {
                 audioSource.Stop();
                 audioSource.PlayOneShot(stoppingSFX);
+
             }, ROTATE_TIME - 0.4f);
+
+            this.StartTimer(() => allowRotation = true, ROTATE_TIME * 2);
         }
 
 		private void ClearShelves()

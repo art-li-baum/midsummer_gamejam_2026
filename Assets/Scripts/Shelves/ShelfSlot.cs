@@ -45,10 +45,5 @@ namespace Gorpozon.WarehouseSim.Shelves
 			instancedItem = null;
 			isStocked = false;
 		}
-
-        private void OnDisable()
-        {
-			if (isStocked) poolService.Release(stockedItemPrefab.ProductData.name, instancedItem);
-        }
     }
 }

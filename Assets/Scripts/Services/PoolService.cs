@@ -43,6 +43,8 @@ namespace Gorpozon.WarehouseSim.Services
 
         private void OnRelease(GrabbableObject grabbable)
         {
+			if (grabbable == null) return;
+
 			grabbable.transform.SetParent(null);
             grabbable.gameObject.SetActive(false);
         }

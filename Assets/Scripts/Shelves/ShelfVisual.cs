@@ -1,10 +1,6 @@
-using SBG.Pocketwatch;
-using NUnit.Framework;
 using UnityEngine;
 using System.Collections.Generic;
-using JetBrains.Annotations;
 using DG.Tweening;
-using Gorpozon.WarehouseSim.Objects;
 
 namespace Gorpozon.WarehouseSim.Shelves
 {

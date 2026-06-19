@@ -10,15 +10,17 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 0fa1ef3796fdb04489a41c2609989e28, type: 3}
-  m_Name: Level2
+  m_Name: Level9
   m_EditorClassIdentifier: 
-  TotalRequiredGBucks: 40
-  PayoutPerCorrectOrder: 8
-  OrdersPerShift: 3
-  PromotionName: Acolyte Packer
+  TotalRequiredGBucks: 2000
+  PayoutPerCorrectOrder: 150
+  OrdersPerShift: 6
+  PromotionName: Enlightened Packer
   LevelIntroduction: []
   OrderPool:
   - {fileID: 11400000, guid: 6713b81adc50ac3468e10ee4e3d033c9, type: 2}
   - {fileID: 11400000, guid: 7b27489aa68a5bf489678193a6d33795, type: 2}
   - {fileID: 11400000, guid: 53c5c7e37bdffda449c9dc6ca8717235, type: 2}
+  - {fileID: 11400000, guid: 72d968f1a046353418fdca472bc13cf3, type: 2}
+  - {fileID: 11400000, guid: 72d968f1a046353418fdca472bc13cf3, type: 2}
   - {fileID: 11400000, guid: 72d968f1a046353418fdca472bc13cf3, type: 2}

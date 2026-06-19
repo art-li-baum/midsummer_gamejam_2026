@@ -417,6 +417,7 @@ Transform:
   - {fileID: 1600412291188566712}
   - {fileID: 6283635835318179789}
   - {fileID: 4920682969947196165}
+  - {fileID: 3588999431305307394}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &2091208842368606103
@@ -438,6 +439,104 @@ MonoBehaviour:
     ComponentIndex: 4
   - SourceGO: {fileID: 2524016740007955121}
     ComponentIndex: 2
+  - SourceGO: {fileID: 5453618355963449027}
+    ComponentIndex: 1
+--- !u!1 &5453618355963449027
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 3588999431305307394}
+  - component: {fileID: 1782741996793127396}
+  m_Layer: 0
+  m_Name: MessageSender
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &3588999431305307394
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5453618355963449027}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 130398021717741867}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1782741996793127396
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5453618355963449027}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b8711ba45f19e4c4caf655b6ce4173b2, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  FirstShiftStarted:
+  - Text: Now you're getting the hang of it!
+    MessageDelay: 1
+    Jitter: 0
+    CustomFontSize: 0
+    FontSize: 60
+  - Text: Check your Order Screen, find the items on the shelves and put it in the
+      box.
+    MessageDelay: 3
+    Jitter: 0
+    CustomFontSize: 0
+    FontSize: 60
+  - Text: Since you're part of the family we assume you know our Catalogue by heart
+      <3
+    MessageDelay: 2
+    Jitter: 0
+    CustomFontSize: 0
+    FontSize: 60
+  - Text: When the package is ready, just press the green button to send it off!
+    MessageDelay: 2
+    Jitter: 0
+    CustomFontSize: 0
+    FontSize: 60
+  FirstPackageShipped:
+  - Text: You're a natural!
+    MessageDelay: 1
+    Jitter: 0
+    CustomFontSize: 0
+    FontSize: 0
+  - Text: At the end of your shift you will be awarded with Glorbo-Bucks that increase
+      your Family Rank :)
+    MessageDelay: 2
+    Jitter: 0
+    CustomFontSize: 0
+    FontSize: 0
+  - Text: To complete your MANDATORY SERVICE, you will need to collect 9999 Glorbo-Bucks!
+    MessageDelay: 2
+    Jitter: 0
+    CustomFontSize: 0
+    FontSize: 0
+  - Text: Get Packing! ;)
+    MessageDelay: 2
+    Jitter: 50
+    CustomFontSize: 0
+    FontSize: 0
+  SecondPackageShipped:
+  - Text: At you current rank you will need to complete 3 orders to finish your shift.
+      Just one more!
+    MessageDelay: 1
+    Jitter: 0
+    CustomFontSize: 0
+    FontSize: 60
 --- !u!1 &5694617294328488611
 GameObject:
   m_ObjectHideFlags: 0

@@ -12,7 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6ee5e6d9a732eb549a1dcaf2b0f3f942, type: 3}
   m_Name: GameProgression
   m_EditorClassIdentifier: 
-  PayoutPerCorrectOrder: 5
   Levels:
   - {fileID: 11400000, guid: cc820984f8bd4a94b862cd4113e29341, type: 2}
   - {fileID: 11400000, guid: 2b72a6075cf142e49b955156506c821e, type: 2}
@@ -20,3 +19,8 @@ MonoBehaviour:
   - {fileID: 11400000, guid: dfddd1ab9c90d4143a284aa791fd1c41, type: 2}
   - {fileID: 11400000, guid: 92a1f2d2d925a194e97a88b49a28ed0a, type: 2}
   - {fileID: 11400000, guid: 8cbbfb40cf1ae054f95c3da7e14c0d9c, type: 2}
+  - {fileID: 11400000, guid: 687bfca1b865fcb45b9292d8d0dde0e8, type: 2}
+  - {fileID: 11400000, guid: 8e0680392709a46458b86187f0f11996, type: 2}
+  - {fileID: 11400000, guid: 8b28462289a250a47b425dbaa456a224, type: 2}
+  - {fileID: 11400000, guid: 4f3b63fa2a9577048bea212f9ffe69fc, type: 2}
+  - {fileID: 11400000, guid: 37387e39fd0a84047b5524419f1b1a5c, type: 2}

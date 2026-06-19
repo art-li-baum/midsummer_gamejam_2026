@@ -48,8 +48,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca70a8d31bbc2c74cb8246fe38f005d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lidCheckOffset: {x: 0, y: 0.875, z: 0}
-  lidCheckSize: {x: 0.75, y: 0.25, z: 1}
+  lidCheckOffset: {x: 0, y: 0.65625, z: 0}
+  lidCheckSize: {x: 0.5625, y: 0.1875, z: 0.75}
   lidCheckMask:
     serializedVersion: 2
     m_Bits: 64
@@ -77,8 +77,8 @@ BoxCollider:
   m_ProvidesContacts: 0
   m_Enabled: 1
   serializedVersion: 3
-  m_Size: {x: 0.65, y: 0.65, z: 0.9}
-  m_Center: {x: 0, y: 0.375, z: 0}
+  m_Size: {x: 0.4875, y: 0.4875, z: 0.675}
+  m_Center: {x: 0, y: 0.28125, z: 0}
 --- !u!95 &2929619554158881283
 Animator:
   serializedVersion: 7
@@ -244,15 +244,15 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 45a82f7cf4e90c04fa70bfa99f5b7897, type: 2}
     - target: {fileID: -8679921383154817045, guid: a6378353a2de2b448821220e3ee24b6e, type: 3}
       propertyPath: m_LocalScale.x
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a6378353a2de2b448821220e3ee24b6e, type: 3}
       propertyPath: m_LocalScale.y
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a6378353a2de2b448821220e3ee24b6e, type: 3}
       propertyPath: m_LocalScale.z
-      value: 1
+      value: 0.75
       objectReference: {fileID: 0}
     - target: {fileID: -8679921383154817045, guid: a6378353a2de2b448821220e3ee24b6e, type: 3}
       propertyPath: m_LocalPosition.x

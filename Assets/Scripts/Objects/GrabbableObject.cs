@@ -49,6 +49,7 @@ namespace Gorpozon.WarehouseSim.Objects
             ServiceLocator.TryGet(out poolService);
             rb.linearDamping = 0.1f;
             rb.angularDamping = 2.0f;
+            gameObject.layer = LayerMask.NameToLayer("Interactible");
         }
 
         public void Interact()

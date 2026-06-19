@@ -1,6 +1,7 @@
 using DG.Tweening;
 using Gorpozon.WarehouseSim.Management;
 using Gorpozon.WarehouseSim.Services;
+using log4net.Core;
 using SBG.Pocketwatch;
 using SBG.ServiceLocating;
 using System;
@@ -14,6 +15,7 @@ namespace Gorpozon.WarehouseSim.UI
 		[SerializeField] private TextMeshProUGUI promptText;
 		[SerializeField] private CanvasGroup startMenu;
 		[SerializeField] private CanvasGroup pauseMenu;
+		[SerializeField] private CanvasGroup endScreen;
         [SerializeField] private CanvasGroup inGameGroup;
         [SerializeField] private CanvasGroup promotionPopup;
         [SerializeField] private CanvasGroup interactionPrompt;
@@ -40,6 +42,7 @@ namespace Gorpozon.WarehouseSim.UI
             playerService.SetPause(true);
 
             progressionManager.OnLevelUp += ShowPromotionPopup;
+            progressionManager.OnEndOfGame += ShowEndScreen;
         }
 
         private void Update()
@@ -50,9 +53,10 @@ namespace Gorpozon.WarehouseSim.UI
         private void OnDestroy()
         {
 			progressionManager.OnLevelUp -= ShowPromotionPopup;
+            progressionManager.OnEndOfGame -= ShowEndScreen;
         }
 
-		public void StartGame()
+        public void StartGame()
 		{
 			startMenu.DOKill();
 			inGameGroup.DOKill();
@@ -82,8 +86,17 @@ namespace Gorpozon.WarehouseSim.UI
 			pauseMenu.DOFade(target, 0.2f).SetUpdate(true);
 		}
 
+        private void ShowEndScreen()
+        {
+            endScreen.alpha = 1;
+			endScreen.interactable = true;
+			endScreen.blocksRaycasts = true;
+        }
+
         private void ShowPromotionPopup(int lvl)
         {
+			if (lvl == progressionManager.Progression.Levels.Length - 1) return;
+
 			this.StartTimer(() =>
 			{
 				promotionPopup.DOKill();

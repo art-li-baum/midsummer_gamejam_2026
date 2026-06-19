@@ -1,3 +1,4 @@
+using Gorpozon.WarehouseSim.Data;
 using Gorpozon.WarehouseSim.Management;
 using Gorpozon.WarehouseSim.Services;
 using SBG.ServiceLocating;
@@ -77,7 +78,14 @@ namespace Gorpozon.WarehouseSim.UI
         private void RefreshData()
 		{
             var currentLevel = progressionManager.Progression.Levels[progressionManager.CurrentLevel];
-            var nextLevel = progressionManager.Progression.Levels[progressionManager.CurrentLevel + 1];
+
+            int nextIndex = progressionManager.CurrentLevel + 1;
+            if (nextIndex >= progressionManager.Progression.Levels.Length)
+            {
+                return;
+            }
+
+            ProgressionLevel nextLevel = progressionManager.Progression.Levels[nextIndex];
 
             clockedInText.text = clockedIn ? "YES" : "NO";
 

@@ -81,7 +81,11 @@ namespace Gorpozon.WarehouseSim.UI
 
         public void HideProgressionReport()
         {
-            playerService.SetPause(false);
+            if (progressionManager.CurrentLevel < progressionManager.Progression.Levels.Length - 1)
+            {
+                playerService.SetPause(false);
+            }
+
             group.blocksRaycasts = false;
             group.interactable = false;
 
@@ -112,7 +116,15 @@ namespace Gorpozon.WarehouseSim.UI
                     levelProgress = 0;
                     previousRank = nextLevel.TotalRequiredGBucks;
 
+                    int nextLevelIndex = previousLevel + 1;
+
                     lastLevel = progressionManager.Progression.Levels[previousLevel];
+
+                    if (nextLevelIndex >= progressionManager.Progression.Levels.Length)
+                    {
+                        break;
+                    }
+
                     nextLevel = progressionManager.Progression.Levels[previousLevel + 1];
                     Setup(lastLevel, nextLevel);
                 }

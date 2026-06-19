@@ -241,10 +241,11 @@
       }
     },
     "com.unity.vfx-toolbox": {
-      "version": "file:C:/Users/lisa/Documents/VFXToolbox",
+      "version": "https://github.com/Unity-Technologies/VFXToolbox.git",
       "depth": 0,
-      "source": "local",
-      "dependencies": {}
+      "source": "git",
+      "dependencies": {},
+      "hash": "685e4ed780efdd8b46473dbb7b665843f2e5789c"
     },
     "com.unity.visualeffectgraph": {
       "version": "17.0.4",

@@ -129,11 +129,11 @@ namespace Gorpozon.WarehouseSim.Shelves
 		{
 
             //reset count for populating
-            int numShelves = NUMBER_OF_SHELVES;
+            int i = 0;
 
             var totalShelves = currentShelves.shelvesInShift;
 
-            while (numShelves > 0)
+            while ( i < NUMBER_OF_SHELVES && i < dataShelfTotal)
             {
                 //wrap around the List
                 if (dataShelfIndex >= dataShelfTotal) dataShelfIndex = 0;
@@ -144,9 +144,9 @@ namespace Gorpozon.WarehouseSim.Shelves
 
                 vis.LoadShelf(shelf);
                 //TODO set better timing spacing
-                vis.MoveIn(startPosition.position + (shelfOffset * (NUMBER_OF_SHELVES - numShelves)), shelfPositions[numShelves - 1].position, ROTATE_TIME);
+                vis.MoveIn(startPosition.position + (shelfOffset * i), shelfPositions[i].position, ROTATE_TIME);
 
-                numShelves--;
+                i++;
                 dataShelfIndex++;
                 visualShelfIndex++;
             }

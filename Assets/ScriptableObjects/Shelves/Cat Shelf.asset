@@ -1,0 +1,21 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78492a855108be140ae512f6ce18bdb8, type: 3}
+  m_Name: Cat Shelf
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: 3784240343339973531, guid: 36f08a850ab1675429d587f7896c19a8, type: 3}
+  - {fileID: 5526227655103587133, guid: 3de60b583e434f1418f4c01a6d05974a, type: 3}
+  - {fileID: 1465763476609632837, guid: 61b3ab545b5c06d44b855738c9050a63, type: 3}
+  - {fileID: 6235165511760134952, guid: 6f485e78335146744a05f11b2f5bf217, type: 3}
+  - {fileID: 355892928753019321, guid: 46cfa51f0f1a6d64c9c16911ed7116eb, type: 3}
+  - {fileID: 7737394512522463763, guid: 5ba2b15cac27e9d458eb4f8ea0b18097, type: 3}

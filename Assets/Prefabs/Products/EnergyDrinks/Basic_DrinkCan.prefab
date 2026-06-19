@@ -70,7 +70,7 @@ PrefabInstance:
       objectReference: {fileID: 2100000, guid: 696aa09fb302bc04a9e863cee5fe1e6a, type: 2}
     - target: {fileID: 919132149155446097, guid: 039fe1d247153b246a4413fae8886137, type: 3}
       propertyPath: m_Name
-      value: DrinkCan (9)
+      value: Basic_DrinkCan
       objectReference: {fileID: 0}
     - target: {fileID: 919132149155446097, guid: 039fe1d247153b246a4413fae8886137, type: 3}
       propertyPath: m_Layer
@@ -156,4 +156,4 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7efaa1a62a538e0468c48fc3146c5a0d, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  ProductData: {fileID: 11400000, guid: 558af681c3aaf9f41999e24214f3495d, type: 2}
+  ProductData: {fileID: 11400000, guid: 707cb8d53d6dbae4389b71cf124647cc, type: 2}

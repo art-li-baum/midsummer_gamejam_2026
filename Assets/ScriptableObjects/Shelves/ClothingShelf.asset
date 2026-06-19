@@ -1,0 +1,20 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!114 &11400000
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 78492a855108be140ae512f6ce18bdb8, type: 3}
+  m_Name: ClothingShelf
+  m_EditorClassIdentifier: 
+  items:
+  - {fileID: -7400221544159203074, guid: 8efec6005926e784195cb3d70a543315, type: 3}
+  - {fileID: -1786900533032381052, guid: 71cd0c93a844b3647ae0e5cbda1891f0, type: 3}
+  - {fileID: -3826547294099446866, guid: ccee1082f99b0cd498df99ad68ad34b2, type: 3}
+  - {fileID: 1678283563394127406, guid: 52a6b39d370c54b40baba05d4dd97ef2, type: 3}
+  - {fileID: 8736973157171744995, guid: 27bb74e94a410654786b55ceaf3ee169, type: 3}

@@ -18,8 +18,28 @@ MonoBehaviour:
   PromotionName: Box Monger
   LevelIntroduction: []
   OrderPool:
-  - {fileID: 11400000, guid: 6713b81adc50ac3468e10ee4e3d033c9, type: 2}
-  - {fileID: 11400000, guid: 7b27489aa68a5bf489678193a6d33795, type: 2}
-  - {fileID: 11400000, guid: 53c5c7e37bdffda449c9dc6ca8717235, type: 2}
-  - {fileID: 11400000, guid: 72d968f1a046353418fdca472bc13cf3, type: 2}
-  - {fileID: 11400000, guid: 72d968f1a046353418fdca472bc13cf3, type: 2}
+  - {fileID: 11400000, guid: 08e795dd15a5d4a42a4d58a7136a5e26, type: 2}
+  - {fileID: 11400000, guid: b422f1bb348bc094f9cfb46d8cb6b044, type: 2}
+  - {fileID: 11400000, guid: 970adef4f66ab574ab95379b640beea7, type: 2}
+  - {fileID: 11400000, guid: db4cf5d7dba763041b3b1e5859ce518f, type: 2}
+  - {fileID: 11400000, guid: b191fc7bd6badde44a7cff8610b7ec65, type: 2}
+  - {fileID: 11400000, guid: afbc29ac5992d57439c7a229ce52d98c, type: 2}
+  - {fileID: 11400000, guid: ab702da521661dd49a09ace31f12331a, type: 2}
+  - {fileID: 11400000, guid: 431427eadb5566540a5b669cf00c3eff, type: 2}
+  - {fileID: 11400000, guid: 070c7a16e004d9040bc18b916016f4d9, type: 2}
+  - {fileID: 11400000, guid: de4f2326b76411c4f9524c084dd47c09, type: 2}
+  - {fileID: 11400000, guid: 51d11c97d8d2d87468b9e50d59d05069, type: 2}
+  - {fileID: 11400000, guid: 4a9821ae364d96d45b6e188c7192a828, type: 2}
+  - {fileID: 11400000, guid: 8bd6b64dc4036484e856b683053f36ce, type: 2}
+  - {fileID: 11400000, guid: 3b738afa5f22f5c4691e3562384e6eaf, type: 2}
+  - {fileID: 11400000, guid: 05ed09cb815655b4f85ce8860e466d33, type: 2}
+  - {fileID: 11400000, guid: e46bc9a3a53cb6c41a298bf5a81a5eaa, type: 2}
+  - {fileID: 11400000, guid: 42633642345e06b49910b92ede784f60, type: 2}
+  - {fileID: 11400000, guid: cba00d8ebe260f945b2dc3d8ad3308bf, type: 2}
+  - {fileID: 11400000, guid: a9be080a926765446827067f76be8dc6, type: 2}
+  - {fileID: 11400000, guid: c0455db916ce8cf4c9c774c9a25a5937, type: 2}
+  - {fileID: 11400000, guid: 732bf0fe5a04ca04eb936f3d00d29182, type: 2}
+  - {fileID: 11400000, guid: f3341fb11155aac488aacac219db360c, type: 2}
+  - {fileID: 11400000, guid: 4f7156df790c6014a94d4de58cacd0ee, type: 2}
+  - {fileID: 11400000, guid: e5b2407e2ce227744b5a07606bd15aa7, type: 2}
+  - {fileID: 11400000, guid: 06d685fc698c4964cb084fbd14142379, type: 2}

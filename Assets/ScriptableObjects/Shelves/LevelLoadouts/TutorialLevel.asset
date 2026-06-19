@@ -14,3 +14,5 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   shelvesInShift:
   - {fileID: 11400000, guid: 6184867db37fe0540bb9c48bd51dd886, type: 2}
+  - {fileID: 11400000, guid: 6184867db37fe0540bb9c48bd51dd886, type: 2}
+  - {fileID: 11400000, guid: 6184867db37fe0540bb9c48bd51dd886, type: 2}

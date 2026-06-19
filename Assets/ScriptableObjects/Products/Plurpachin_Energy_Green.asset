@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfb8f86f77aed7646b21066b5aa9a0d7, type: 3}
-  m_Name: Gasoline
+  m_Name: Plurpachin_Energy_Green
   m_EditorClassIdentifier: 
-  DisplayName: Gasoline
-  Brand: 
-  Price: 5.2
-  Description: "\xF6\xF6\xF6\xF6feadwawdwdawefe"
+  DisplayName: PlurpaChin Energy - Classic
+  Price: 2.99
+  Description: 

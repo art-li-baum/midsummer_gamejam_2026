@@ -10,9 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfb8f86f77aed7646b21066b5aa9a0d7, type: 3}
-  m_Name: Flug
+  m_Name: Quoople_CatLoaf_White
   m_EditorClassIdentifier: 
-  DisplayName: Flug
-  Brand: 
-  Price: 2.5
-  Description: Pwwadwgr
+  DisplayName: Quoople Loaf - Vanilla
+  Price: 19.99
+  Description: 

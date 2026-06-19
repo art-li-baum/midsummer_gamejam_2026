@@ -10,11 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfb8f86f77aed7646b21066b5aa9a0d7, type: 3}
-  m_Name: BrightBeans
+  m_Name: Glorbozon_CatLoaf_Vanilla
   m_EditorClassIdentifier: 
-  DisplayName: Bright Beans
-  Brand: 
-  Price: 10.23
-  Description: 'ABBBBBBBBBBBBBBBBBBe
-
-    w'
+  DisplayName: Glorbozon Basics Loaf - Cardboard Vanilla
+  Price: 14.99
+  Description: 

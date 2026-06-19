@@ -10,11 +10,11 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f787b1f9e3376a4fa7a66713d2e479c, type: 3}
-  m_Name: MediumOrder
+  m_Name: TestOrder5
   m_EditorClassIdentifier: 
   BoxSize: 2
   Products:
-  - Product: {fileID: 11400000, guid: acca37c753faa67408d959f83205516f, type: 2}
+  - Product: {fileID: 11400000, guid: 7e0819f057718ae4f8b2b9ba7e438973, type: 2}
     Amount: 1
-  - Product: {fileID: 11400000, guid: 558af681c3aaf9f41999e24214f3495d, type: 2}
+  - Product: {fileID: 11400000, guid: 13f3c1a217c6dfb4f87829fe07f552a6, type: 2}
     Amount: 1

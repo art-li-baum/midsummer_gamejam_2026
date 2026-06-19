@@ -9,12 +9,10 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: cfb8f86f77aed7646b21066b5aa9a0d7, type: 3}
-  m_Name: Prombu
+  m_Script: {fileID: 11500000, guid: 8f787b1f9e3376a4fa7a66713d2e479c, type: 3}
+  m_Name: TestOrder4
   m_EditorClassIdentifier: 
-  DisplayName: Prombu
-  Brand: 
-  Price: 0.25
-  Description: 'OOOOOOOOO
-
-    UUUUUUUUU'
+  BoxSize: 2
+  Products:
+  - Product: {fileID: 11400000, guid: 43a5c8b6f042388469b27612e8118b45, type: 2}
+    Amount: 2

@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f787b1f9e3376a4fa7a66713d2e479c, type: 3}
-  m_Name: NewShippingOrder
+  m_Script: {fileID: 11500000, guid: 34d334c9818642f4f9b786b056074d29, type: 3}
+  m_Name: TestLoadout
   m_EditorClassIdentifier: 
-  BoxSize: 2
-  Products:
-  - Product: {fileID: 11400000, guid: 558af681c3aaf9f41999e24214f3495d, type: 2}
-    Amount: 2
+  shelvesInShift:
+  - {fileID: 11400000, guid: 7f8b0b76e6f586c4bb6479997045c745, type: 2}
+  - {fileID: 11400000, guid: ace857212b4c95540871d1d0e16d95e0, type: 2}

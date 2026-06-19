@@ -9,10 +9,9 @@ MonoBehaviour:
   m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 8f787b1f9e3376a4fa7a66713d2e479c, type: 3}
-  m_Name: SmallOrder
+  m_Script: {fileID: 11500000, guid: cfb8f86f77aed7646b21066b5aa9a0d7, type: 3}
+  m_Name: Plurpachin_Energy_Green_12Pack
   m_EditorClassIdentifier: 
-  BoxSize: 2
-  Products:
-  - Product: {fileID: 11400000, guid: edf538aecfb7e2b4cbe3ee84518c8194, type: 2}
-    Amount: 1
+  DisplayName: PlurpaChin Energy - 12 PACK (Classic)
+  Price: 34.99
+  Description: 

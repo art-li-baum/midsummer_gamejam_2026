@@ -10,11 +10,8 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: cfb8f86f77aed7646b21066b5aa9a0d7, type: 3}
-  m_Name: Bling
+  m_Name: Quoople_CatLoaf_Black
   m_EditorClassIdentifier: 
-  DisplayName: Bling
-  Brand: 
-  Price: 23.02
-  Description: 'wdafawdwadwa
-
-    dwdwadwdwaaaaaaaaaaaaaaaaa'
+  DisplayName: Quoople Loaf - Dark Chocolate
+  Price: 24.99
+  Description: 

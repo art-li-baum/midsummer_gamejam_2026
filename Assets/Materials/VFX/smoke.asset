@@ -66,32 +66,3 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Enabled: 1
   Settings: {fileID: -3895437095550004205}
---- !u!114 &3511441373438676272
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: d77e015c9f1a1eb44a23bc84ec1b265d, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  FlipbookNumU: 0
-  FlipbookNumV: 5
-  Mode: 1
---- !u!114 &6289099413796140076
-MonoBehaviour:
-  m_ObjectHideFlags: 1
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 43fd70c9b64e53a4e8702dbd00412a0f, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  Enabled: 1
-  Settings: {fileID: 3511441373438676272}

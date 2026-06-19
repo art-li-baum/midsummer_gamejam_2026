@@ -10,8 +10,10 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 34d334c9818642f4f9b786b056074d29, type: 3}
-  m_Name: 1_ShelfLoadout
+  m_Name: 4_ShelfLoadout
   m_EditorClassIdentifier: 
   shelvesInShift:
   - {fileID: 11400000, guid: 1394265ea533a93478e8d02ee17bbfa7, type: 2}
   - {fileID: 11400000, guid: 16a325eb65253ac46972e3c29b5f164b, type: 2}
+  - {fileID: 11400000, guid: acadb12647c54e649903a6766b319f84, type: 2}
+  - {fileID: 11400000, guid: 4e8c834debc551947b483fe760645558, type: 2}

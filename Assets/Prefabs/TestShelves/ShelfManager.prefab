@@ -306,9 +306,17 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   visualShelfPrefab: {fileID: 6272472748622554584, guid: da517ed4949d74b4098a5ee4005ae04e, type: 3}
   loadedShelvesPerLevel:
-  - {fileID: 11400000, guid: d19c832b1eece334095d87fcfeccf7b5, type: 2}
-  - {fileID: 11400000, guid: 1aad26895a2cc6f4eb3b2fa2e5839f49, type: 2}
-  - {fileID: 11400000, guid: d19c832b1eece334095d87fcfeccf7b5, type: 2}
+  - {fileID: 11400000, guid: 0712eb9e1db7563439d9d95ccbd056cd, type: 2}
+  - {fileID: 11400000, guid: 5eea4948322b1dc4c98661ade572f844, type: 2}
+  - {fileID: 11400000, guid: fb15a33f7de5410458ee5b7852a1bf8e, type: 2}
+  - {fileID: 11400000, guid: d8a3ccb40443dae448f29d4cd1f2a5eb, type: 2}
+  - {fileID: 11400000, guid: 0dc36622e4274254fbbb9fffa0258b5d, type: 2}
+  - {fileID: 11400000, guid: 2e338b21911c30c4bb6ef959c1a5ef96, type: 2}
+  - {fileID: 11400000, guid: 6510685ef6ad3b3478f1641609384d7f, type: 2}
+  - {fileID: 11400000, guid: f335fc424d7113f419f79c75ae95ba91, type: 2}
+  - {fileID: 11400000, guid: ff5fbfb3009a02842b60f2fb4593e9c3, type: 2}
+  - {fileID: 11400000, guid: 9a741633ee4d66040828cbf6e75f7a8e, type: 2}
+  - {fileID: 11400000, guid: 9a741633ee4d66040828cbf6e75f7a8e, type: 2}
   shelfPositions:
   - {fileID: 7690697181355274042}
   - {fileID: 7443293889416338382}

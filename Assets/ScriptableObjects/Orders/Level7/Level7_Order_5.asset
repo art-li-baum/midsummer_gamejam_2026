@@ -10,9 +10,13 @@ MonoBehaviour:
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 8f787b1f9e3376a4fa7a66713d2e479c, type: 3}
-  m_Name: Level7_Order_1
+  m_Name: Level7_Order_5
   m_EditorClassIdentifier: 
   BoxSize: 2
   Products:
-  - Product: {fileID: 11400000, guid: a3aa2e145e9dceb48a40301005afbd3b, type: 2}
+  - Product: {fileID: 11400000, guid: a3b0a6f30e6e802459ca36fd5426ff83, type: 2}
+    Amount: 1
+  - Product: {fileID: 11400000, guid: 707cb8d53d6dbae4389b71cf124647cc, type: 2}
     Amount: 2
+  - Product: {fileID: 11400000, guid: 7daf418b45d7b264191aa24db8291116, type: 2}
+    Amount: 1

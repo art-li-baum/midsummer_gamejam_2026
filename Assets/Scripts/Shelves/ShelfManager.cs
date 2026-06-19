@@ -95,6 +95,8 @@ namespace Gorpozon.WarehouseSim.Shelves
 
 		public void RestockShelves()
 		{
+            if (!shiftManager.ShiftOngoing) return;
+
             ClearShelves();
             LoadShelves();
 
@@ -102,7 +104,8 @@ namespace Gorpozon.WarehouseSim.Shelves
             this.StartTimer(() => 
             {
                 audioSource.Stop();
-                audioSource.PlayOneShot(stoppingSFX); }, ROTATE_TIME - 0.4f);
+                audioSource.PlayOneShot(stoppingSFX);
+            }, ROTATE_TIME - 0.4f);
         }
 
 		private void ClearShelves()

@@ -1,5 +1,7 @@
 using Gorpozon.WarehouseSim.Data;
+using Gorpozon.WarehouseSim.Services;
 using Gorpozon.WarehouseSim.Shelves;
+using SBG.ServiceLocating;
 using UnityEngine;
 
 namespace Gorpozon.WarehouseSim.Objects
@@ -20,9 +22,31 @@ namespace Gorpozon.WarehouseSim.Objects
 
         private ShelfSlot shelf;
 
+        private ShiftManager shiftManager;
+        private PoolService poolService;
+
         private void Awake()
         {
             rb = GetComponent<Rigidbody>();
+        }
+
+        private void OnEnable()
+        {
+            isHeld = false;
+            packaged = false;
+
+            if (shiftManager == null) ServiceLocator.TryGet(out shiftManager);
+            shiftManager.OnShiftComplete += OnShiftComplete;
+        }
+
+        private void OnDisable()
+        {
+            if (shiftManager != null) shiftManager.OnShiftComplete -= OnShiftComplete;
+        }
+
+        private void Start()
+        {
+            ServiceLocator.TryGet(out poolService);
         }
 
         public void Interact()
@@ -70,6 +94,13 @@ namespace Gorpozon.WarehouseSim.Objects
 
             rb.isKinematic = false;
             transform.SetParent(null);
+        }
+
+        private void OnShiftComplete()
+        {
+            if (onShelf || packaged) return;
+
+            poolService.Release(ProductData.name, this);
         }
     }
 }

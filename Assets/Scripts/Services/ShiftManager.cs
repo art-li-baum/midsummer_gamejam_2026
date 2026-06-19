@@ -44,6 +44,7 @@ namespace Gorpozon.WarehouseSim.Services
         public ShippingOrder CurrentOrder => currentOrder;
 		public int QueuedOrderCount => remainingOrders.Count;
 		public List<OrderScore> Scores => orderScores;
+		public bool ShiftOngoing => shiftOngoing;
 
 		private Queue<ShippingOrder> remainingOrders = new();
 		private List<OrderScore> orderScores = new();

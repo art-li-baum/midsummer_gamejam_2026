@@ -34,6 +34,5 @@ MonoBehaviour:
     FontSize: 0
   OrderPool:
   - {fileID: 11400000, guid: 6713b81adc50ac3468e10ee4e3d033c9, type: 2}
-  - {fileID: 11400000, guid: 7b27489aa68a5bf489678193a6d33795, type: 2}
-  - {fileID: 11400000, guid: 53c5c7e37bdffda449c9dc6ca8717235, type: 2}
-  - {fileID: 11400000, guid: 72d968f1a046353418fdca472bc13cf3, type: 2}
+  - {fileID: 11400000, guid: eb6775c71a13ee74bbbf163fe2761a07, type: 2}
+  - {fileID: 11400000, guid: e85174280a8d0e847ada2ef2c9922fda, type: 2}

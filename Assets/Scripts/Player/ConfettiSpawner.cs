@@ -8,8 +8,6 @@ namespace Gorpozon.WarehouseSim.Player
 	{
 		public ParticleSystem[] Particles;
 
-		[SerializeField] private AudioSource sfxPlayer;
-
 		private ProgressionManager progressionManager;
 
 		void Start()
@@ -21,7 +19,6 @@ namespace Gorpozon.WarehouseSim.Player
 
         private void SpawnConfetti(int lvl)
         {
-            sfxPlayer.Play();
 
             foreach (var particle in Particles)
 			{

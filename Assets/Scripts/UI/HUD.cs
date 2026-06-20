@@ -23,7 +23,9 @@ namespace Gorpozon.WarehouseSim.UI
 		[SerializeField] private float elementFadeTime = 0.2f;
 		[SerializeField] private float controlsAlpha = 0.25f;
 
-		private ProgressionManager progressionManager;
+        private AudioSource sfxPlayer;
+
+        private ProgressionManager progressionManager;
 		private PlayerService playerService;
 
 		private bool pauseMenuActive;
@@ -67,6 +69,8 @@ namespace Gorpozon.WarehouseSim.UI
 			startMenu.blocksRaycasts = false;
 
             playerService.SetPause(false);
+
+			sfxPlayer = GetComponent<AudioSource>();
         }
 
 		public void TogglePause()
@@ -110,9 +114,11 @@ namespace Gorpozon.WarehouseSim.UI
 				promotionPopup.DOKill();
 				promotionPopup.DOFade(1, 0.5f).SetUpdate(false).OnComplete(() =>
 				{
-					this.StartTimer(() =>
+                    sfxPlayer.Play();
+
+                    this.StartTimer(() =>
 					{
-						promotionPopup.DOFade(0, 0.25f);
+                        promotionPopup.DOFade(0, 0.25f);
 					}, 4f);
 				});
 

@@ -12,7 +12,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 8f787b1f9e3376a4fa7a66713d2e479c, type: 3}
   m_Name: Level9_Order_4
   m_EditorClassIdentifier: 
-  BoxSize: 0
+  BoxSize: 2
   Products:
   - Product: {fileID: 11400000, guid: d5d113553824805469fbddc063e686a3, type: 2}
     Amount: 1

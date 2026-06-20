@@ -1,5 +1,19 @@
 %YAML 1.1
 %TAG !u! tag:unity3d.com,2011:
+--- !u!244 &-8898679124109379862
+AudioMixerEffectController:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: 
+  m_EffectID: 4d50aa1995acc25409e5325c0c0a0be0
+  m_EffectName: Attenuation
+  m_MixLevel: 8be638746d0f25c42825461587a80dcc
+  m_Parameters: []
+  m_SendTarget: {fileID: 0}
+  m_EnableWetMix: 0
+  m_Bypass: 0
 --- !u!244 &-8514024557573063925
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -14,6 +28,25 @@ AudioMixerEffectController:
   m_SendTarget: {fileID: 0}
   m_EnableWetMix: 0
   m_Bypass: 0
+--- !u!243 &-8433763986834539560
+AudioMixerGroupController:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_Name: confetti
+  m_AudioMixer: {fileID: 24100000}
+  m_GroupID: ac4296f80637d5a4ca9ebc48c8cb3701
+  m_Children: []
+  m_Volume: ae8e7cfb64138ae48a3e56a66fe9980e
+  m_Pitch: cf34ff136314e1642bca08b6bc8f79df
+  m_Send: 00000000000000000000000000000000
+  m_Effects:
+  - {fileID: -8898679124109379862}
+  m_UserColorIndex: 0
+  m_Mute: 0
+  m_Solo: 0
+  m_BypassEffects: 0
 --- !u!244 &-7676563777504796576
 AudioMixerEffectController:
   m_ObjectHideFlags: 3
@@ -111,6 +144,7 @@ AudioMixerController:
     - e664897dcc18ccb40b9704d28eec325d
     - 1923a39d40f80334ca7e79a742ad15e6
     - 3a8f8dbe6876ca54ea4d4618c9bd2a86
+    - ac4296f80637d5a4ca9ebc48c8cb3701
     name: View
   m_CurrentViewIndex: 0
   m_TargetSnapshot: {fileID: 24500006}
@@ -130,6 +164,7 @@ AudioMixerGroupController:
   - {fileID: -6856967004216720897}
   - {fileID: -2264458174963957024}
   - {fileID: 5888993706660606469}
+  - {fileID: -8433763986834539560}
   m_Volume: b04ac7f8e24ce644c8e0e81d5ce2f690
   m_Pitch: 6f5934d317a202648bdf54693f337d71
   m_Send: 00000000000000000000000000000000
@@ -168,6 +203,7 @@ AudioMixerSnapshotController:
     51411c5510c43f946bf09785924c9dfa: -757
     061816c68702c9c4f8c6aa8c92a1845c: -11.400904
     c2118cf9afd30f54cb038955bb0d31db: -3099
+    ae8e7cfb64138ae48a3e56a66fe9980e: 2.850226
     f560b2ad1af9f5049acb0a8dcbd1eec1: -12.128018
     f5ae42de6b3442843b34346accb847d4: -932
     74e83c0f4bc3dce4fb4e22d48b224f73: 0.020935655

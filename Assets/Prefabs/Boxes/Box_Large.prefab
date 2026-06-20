@@ -48,7 +48,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: ca70a8d31bbc2c74cb8246fe38f005d9, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  lidCheckOffset: {x: 0, y: 1.25, z: 0}
+  lidCheckOffset: {x: 0, y: 1.31, z: 0}
   lidCheckSize: {x: 1.25, y: 0.5, z: 1.75}
   lidCheckMask:
     serializedVersion: 2
